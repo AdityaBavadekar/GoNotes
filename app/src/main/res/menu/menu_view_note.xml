@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Search"
+        android:orderInCategory="96"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:id="@+id/action_search_view_notes"
+        />
+
+    <item android:title="Change Arrangement"
+        android:orderInCategory="97"
+        android:id="@+id/action_arrangement_view_notes"
+        />
+
+    <item android:title="Send feedback"
+        android:orderInCategory="98"
+        android:id="@+id/action_send_feedback_view_notes"
+        />
+
+    <item android:title="Settings"
+        android:orderInCategory="99"
+        android:id="@+id/action_settings_view_notes"
+        />
+
+
+</menu>

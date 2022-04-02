@@ -1,3 +1,52 @@
 <resources>
     <string name="app_name">Go Notes</string>
+    <string name="about_header">Hello, I am About Fragment</string>
+    <string name="login_header">Hello, I am Login Fragment</string>
+    <string name="settings_header">Hello, I am Settings Fragment</string>
+    <string name="backup_header">Hello, I am Backup Fragment</string>
+    <string name="update_header">Hello, I am Update Fragment</string>
+    <string name="view_notes_header">Hello, I am View Notes Fragment</string>
+    <string name="edit_note_header">Hello, I am Edit Note Fragment</string>
+    <string name="create_note_header">Hello, I am Create Note Fragment</string>
+    <string name="welcome_header">Hello, I am Welcome Fragment</string>
+    <string name="bin_header">Hello, I am Bin Fragment</string>
+    <string name="launcher_header">Hello, I am Launcher Fragment</string>
+
+
+<!--    <string name="gonotes_font_family">sans-serif-condensed</string>-->
+    <string name="gonotes_font_family">sans-serif-light</string>
+    <string name="signin_with_google">SignIn with Google</string>
+    <string name="skip">Skip</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="note_text">Note</string>
+    <string name="add_note">Add Note</string>
+    <string name="note_title_text">Note Title</string>
+    <string name="note_body_text">Note Body</string>
+    <string name="backup_text">Backup</string>
+    <string name="delete_all_notes">Delete all notes</string>
+    <string name="restore_all_notes">Restore all notes</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Default Note Template</string>
+    <string name="sync_header">Backup and Sync</string>
+    <string name="notes_header">Notes and Customisation</string>
+    <string name="help_and_faqs_header">Help and Feedback</string>
+    <string name="about_app_header">About Go Notes</string>
+    <string name="contact_us_app_header">Contact Us</string>
+    <string name="enable_bin_app_header">Enabled Recycle Bin </string>
+    <string name="import_export_app_header">Import and Export notes</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="update_text">Update</string>
+    <string name="note_is_locked">Note is Locked</string>
 </resources>

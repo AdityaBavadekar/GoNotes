@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_extra_large">45sp</dimen>
+    <dimen name="button_text_size">25sp</dimen>
+    <dimen name="default_fab_margin">16dp</dimen>
+    <dimen name="note_margin">5dp</dimen>
+    <dimen name="note_width">200dp</dimen>
+    <dimen name="note_corner_radius">25dp</dimen>
+    <dimen name="note_icon_size">35dp</dimen>
+    <dimen name="note_icon_padding">6dp</dimen>
+    <dimen name="edit_note_title_text_size">25sp</dimen>
+    <dimen name="edit_note_body_text_size">20sp</dimen>
+</resources>

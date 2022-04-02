@@ -1,7 +1,8 @@
-package com.adityaamolbavadekar.gonotes
+package com.adityaamolbavadekar.gonotes.features.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.adityaamolbavadekar.gonotes.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

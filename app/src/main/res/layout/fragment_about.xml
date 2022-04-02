@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:fontFamily="@string/gonotes_font_family"
+        android:gravity="center"
+        android:padding="25dp"
+        android:text="@string/about_header"
+        android:textSize="@dimen/text_size_extra_large" />
+
+    <Button
+        android:id="@+id/contactButton"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@string/gonotes_font_family"
+        android:padding="20dp"
+        android:text="@string/contact_us"
+        android:textAllCaps="false"
+        android:textSize="@dimen/button_text_size" />
+
+</LinearLayout>

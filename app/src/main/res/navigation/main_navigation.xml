@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/viewNoteFragment">
+
+    <fragment
+        android:id="@+id/viewNoteFragment"
+        android:name="com.adityaamolbavadekar.gonotes.features.note.view.ViewNoteFragment"
+        android:label="Go Notes"
+        tools:layout="@layout/fragment_view_notes">
+        <action
+            android:id="@+id/action_viewNoteFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+        <action
+            android:id="@+id/action_viewNoteFragment_to_createNoteFragment"
+            app:destination="@id/createNoteFragment" />
+        <action
+            android:id="@+id/action_viewNoteFragment_to_binFragment"
+            app:destination="@id/binFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.adityaamolbavadekar.gonotes.features.note.edit.EditNoteFragment"
+        android:label="Edit Note"
+        tools:layout="@layout/fragment_edit_note" />
+    <fragment
+        android:id="@+id/createNoteFragment"
+        android:name="com.adityaamolbavadekar.gonotes.features.note.create.CreateNoteFragment"
+        android:label="Create Note"
+        tools:layout="@layout/fragment_create_note" />
+    <fragment
+        android:id="@+id/binFragment"
+        android:name="com.adityaamolbavadekar.gonotes.features.bin.BinFragment"
+        android:label="Notes Bin"
+        tools:layout="@layout/fragment_bin" />
+</navigation>
