@@ -68,12 +68,22 @@ The Screens can be either fragments or activities.
 30. Permissions Activity (if required)
 31. Save as Dialog Activity 
 
+### Main Screens
+* Welcome Activity 
+* Main Home Activity 
+* Login (Only Google SignIn)
+* Create New Note Fragment
+* Edit Note Fragment
+* View Notes Fragment 
+* Recycle Bin Fragment
+* Settings Activity 
+* About Fragment 
 
 On App Start : 
 1. Launcher Activity > (if user hasn't got a welcome) Welcome Activity > Main Home Activity
 2. View Notes Fragment > You can go everywhere.
 3. Create New Note Fragment > View Notes Fragment
-4. Edite Note Fragment > View Notes Fragment
+4. Edit Note Fragment > View Notes Fragment
 
 
 ## A Go Note

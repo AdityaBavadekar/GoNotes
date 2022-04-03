@@ -1,0 +1,62 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Backup" />
+
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$SyncFragment"
+        app:iconSpaceReserved="false"
+        app:key="sync_header"
+        app:title="@string/sync_header" />
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Note" />
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$MessagesFragment"
+        app:iconSpaceReserved="false"
+        app:key="messages_header"
+        app:title="@string/messages_header" />
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$NoteCustomisationFragment"
+        app:iconSpaceReserved="false"
+        app:key="notes_header"
+        app:title="@string/notes_header" />
+
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$ImportExportFragment"
+        app:iconSpaceReserved="false"
+        app:key="import_export_header"
+        app:title="@string/import_export_app_header" />
+
+    <SwitchPreferenceCompat
+        app:iconSpaceReserved="false"
+        app:key="enable_bin"
+        app:summaryOff="Recycle Bin is Disabled. Notes will be deleted permenantly."
+        app:summaryOn="Recycle Bin is Enabled. Recycle Bin stores deleted items for 30-days."
+        app:title="@string/enable_bin_app_header" />
+    
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="Others" />
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$HelpFragment"
+        app:iconSpaceReserved="false"
+        app:key="help_header"
+        app:title="@string/help_and_faqs_header" />
+
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$AboutFragment"
+        app:iconSpaceReserved="false"
+        app:key="about_header"
+        app:title="@string/about_app_header" />
+
+    <Preference
+        app:fragment="com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity$ContactUsFragment"
+        app:iconSpaceReserved="false"
+        app:key="contact_header"
+        app:title="@string/contact_us" />
+
+
+</PreferenceScreen>

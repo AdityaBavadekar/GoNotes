@@ -1,0 +1,32 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!--Components-->
+
+    <!--    BottomAppBar-->
+    <style name="GoNotes.Widget.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+        <!-- Customize your theme here. -->
+        <item name="colorSurface">@color/BlackColor</item>
+    </style>
+
+
+    <!--Bottom Sheets-->
+    <style name="ThemeOverlay.GoNotes.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+<!--        <item name="android:windowAnimationStyle">@style/Animation.GoNotes.BottomSheet.Modal</item>TODO-->
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@android:color/transparent</item>
+<!--        <item name="bottomSheetStyle">@style/Widget.GoNotes.BottomSheet.Modal</item>TODO-->
+        <item name="android:navigationBarColor" tools:targetApi="lollipop">?attr/colorSurface</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">@android:color/transparent</item>
+    </style>
+
+    <style name="Widget.GoNotes.BottomSheet.Modal" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <item name="shapeAppearanceOverlay">?attr/shapeAppearanceLargeComponent</item>
+    </style>
+
+    <!--Navigation Drawer-->
+    <style name="Widget.GoNotes.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemTextAppearance">?attr/textAppearanceBody2</item>
+    </style>
+
+
+</resources>

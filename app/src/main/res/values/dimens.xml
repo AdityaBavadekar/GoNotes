@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_extra_large">16sp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
+    <dimen name="launcher_app_name_text_size">22sp</dimen>
+    <dimen name="default_fab_margin">16dp</dimen>
+    <dimen name="note_margin">5dp</dimen>
+    <dimen name="note_width">200dp</dimen>
+    <dimen name="note_corner_radius">25dp</dimen>
+    <dimen name="note_icon_size">35dp</dimen>
+    <dimen name="note_icon_padding">6dp</dimen>
+    <dimen name="edit_note_title_text_size">25sp</dimen>
+    <dimen name="edit_note_body_text_size">20sp</dimen>
+
+
+<!--    TEXT SIZES-->
+    <dimen name="text_size_display_large">57sp</dimen>
+    <dimen name="text_size_display_medium">45sp</dimen>
+    <dimen name="text_size_display_small">36sp</dimen>
+    <dimen name="text_size_headline_large">32sp</dimen>
+    <dimen name="text_size_headline_medium">27sp</dimen>
+    <dimen name="text_size_headline_small">24sp</dimen>
+    <dimen name="text_size_title_large">22sp</dimen>
+    <dimen name="text_size_title_medium">16sp</dimen>
+    <dimen name="text_size_title_small">13sp</dimen>
+    <dimen name="text_size_body_large">16sp</dimen>
+    <dimen name="text_size_body_medium">13sp</dimen>
+    <dimen name="text_size_body_small">12sp</dimen>
+    <dimen name="text_size_label_large">13sp</dimen>
+    <dimen name="text_size_label_medium">12sp</dimen>
+    <dimen name="text_size_label_small">11sp</dimen>
+<!--    TEXT SIZES-->
+
+<!--    MATERIAL-->
+
+    <dimen name="keyline_0">2dp</dimen>
+    <dimen name="keyline_1">4dp</dimen>
+    <dimen name="keyline_2">8dp</dimen>
+    <dimen name="keyline_4">16dp</dimen>
+    <dimen name="keyline_5">24dp</dimen>
+    <dimen name="component_label_horizontal_margin">@dimen/keyline_4</dimen>
+    <dimen name="elevation_default_top_app_bar">4dp</dimen>
+
+</resources>
