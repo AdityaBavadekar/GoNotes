@@ -5,31 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:color="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fontFamily="@string/gonotes_font_family"
-        android:gravity="center"
-        android:padding="25dp"
-        android:text="@string/view_notes_header"
-        android:textSize="@dimen/text_size_extra_large"
-        android:visibility="gone" />
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/notesRecyclerView"
+        android:background="?colorPrimary"
+        android:layout_height="56dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addNoteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/default_fab_margin"
-        android:fontFamily="@string/gonotes_font_family"
-        android:padding="20dp"
-        android:theme="@style/Theme.MaterialComponents"
-        android:text="@string/add_note"
-        android:textAllCaps="false"
-        android:textSize="@dimen/button_text_size" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:id="@+id/toolbar"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            tools:menu="@menu/menu_view_note"
+            app:title="@string/app_name"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRecyclerView"
@@ -37,10 +31,23 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:scrollbarStyle="insideInset"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:background="@android:color/transparent"
-        android:layout_margin="5dp"
+        android:layout_marginHorizontal="5dp"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:spanCount="2"
         tools:listitem="@layout/item_note" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/default_fab_margin"
+        android:padding="20dp" />
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="3dp"
+        android:scrollbarSize="2dp"
+        android:scrollbarStyle="outsideOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/noteTitleEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_note_edit_text_background"
+                android:hint="@string/note_title_text"
+                android:inputType="textMultiLine"
+                android:maxLines="15"
+                android:padding="20dp"
+                android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+                tools:text="@tools:sample/full_names" />
+
+            <EditText
+                android:id="@+id/noteBodyEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edit_note_edit_text_background"
+                android:gravity="start"
+                android:hint="@string/note_body_text"
+                android:inputType="textMultiLine"
+                android:padding="20dp"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+                tools:text="@tools:sample/lorem/random[10]" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        app:menu="@menu/menu_edit_note_bottom_bar" />
 
     <TextView
         android:layout_width="match_parent"
@@ -10,37 +67,9 @@
         android:fontFamily="@string/gonotes_font_family"
         android:gravity="center"
         android:padding="25dp"
-        android:text="@string/create_note_header"
-        android:textSize="@dimen/text_size_extra_large" />
+        android:text="@string/edit_note_header"
+        android:textSize="@dimen/text_size_extra_large"
+        android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/noteTitleEditText"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@string/gonotes_font_family"
-        android:inputType="textMultiLine"
-        android:maxHeight="200dp"
-        android:padding="20dp"
-        android:text="@string/note_title_text"
-        android:textAllCaps="false"
-        android:textSize="@dimen/button_text_size"
-        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/noteBodyEditText"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edit_text_background"
-        android:fontFamily="@string/gonotes_font_family"
-        android:inputType="textMultiLine"
-        android:maxHeight="200dp"
-        android:padding="20dp"
-        android:text="@string/note_body_text"
-        android:textAllCaps="false"
-        android:textSize="@dimen/button_text_size" />
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

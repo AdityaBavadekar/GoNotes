@@ -3,26 +3,46 @@
     <string name="about_header">Hello, I am About Fragment</string>
     <string name="login_header">Hello, I am Login Fragment</string>
     <string name="settings_header">Hello, I am Settings Fragment</string>
-    <string name="backup_header">Hello, I am Backup Fragment</string>
+    <string name="backup_header">Backup and Sync</string>
+    <string name="backup_why_do_we_require_sign_in_header">Why do we require Google Sign in?</string>
+    <string name="backup_why_do_we_require_sign_in_content">We back up your notes to your Google Account so that all notes remain private to you(no one can see them, not even us) and you can get those notes easily latter on.</string>
+    <string name="backup_last">Last back up : %s</string>
+    <string name="backup_logged_in_account">Back up account : %s</string>
+    <string name="backup_details_header">What do we back up to your account?</string>
+    <string name="backup_details_content">Backed up notes only include : \n    *Titles \n    *Descriptions \n    *Colours</string>
+    <string name="backup_info">Your phone backs up automatically over Wi-Fi after an interval of 7-days that is weekly.\nYou can change this interval to back up notes Daily, Weekly or Monthly.</string>
+    <string-array name="backup_intervals">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
     <string name="update_header">Hello, I am Update Fragment</string>
+    <string name="update_last_on">Last Update : 30th April,2022</string>
+    <string name="update_app_text">Update Go Notes</string>
+    <string name="update_app_text_checking">Checking…</string>
+    <string name="update_app_text_check_for_updates">Check for updates</string>
+    <string name="update_app_text_not_required">Latest version is already installed</string>
+    <string name="update_version_notes_header">What Features are included in %s version?</string>
+    <string name="update_version_notes_content">Following features are included : \n    %s</string>
+    <string name="update_when_do_we_post">When do we send updates?</string>
+    <string name="update_when_do_we_post_content">We send updates mostly every month, so that you don\'t have to update app every-day.</string>
+    <string name="update_content">We are always making changes and improvements to Go Notes, to add few new features and to make sure you don\'t miss a thing.</string>
     <string name="view_notes_header">Hello, I am View Notes Fragment</string>
     <string name="edit_note_header">Hello, I am Edit Note Fragment</string>
     <string name="create_note_header">Hello, I am Create Note Fragment</string>
     <string name="welcome_header">Hello, I am Welcome Fragment</string>
     <string name="bin_header">Hello, I am Bin Fragment</string>
     <string name="launcher_header">Hello, I am Launcher Fragment</string>
-
-
-<!--    <string name="gonotes_font_family">sans-serif-condensed</string>-->
     <string name="gonotes_font_family">sans-serif-light</string>
     <string name="signin_with_google">SignIn with Google</string>
+    <string name="signin_with_google_not_needed">You\'re already logged in</string>
     <string name="skip">Skip</string>
     <string name="contact_us">Contact Us</string>
     <string name="note_text">Note</string>
     <string name="add_note">Add Note</string>
     <string name="note_title_text">Note Title</string>
-    <string name="note_body_text">Note Body</string>
-    <string name="backup_text">Backup</string>
+    <string name="note_body_text">Write description here!</string>
+    <string name="backup_text">Back up now</string>
     <string name="delete_all_notes">Delete all notes</string>
     <string name="restore_all_notes">Restore all notes</string>
     <string name="title_activity_settings">SettingsActivity</string>
@@ -49,4 +69,5 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="update_text">Update</string>
     <string name="note_is_locked">Note is Locked</string>
+    <string name="backup_drop_down_prefix_text">Back up :</string>
 </resources>

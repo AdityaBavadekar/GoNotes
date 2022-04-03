@@ -19,22 +19,20 @@
         android:id="@+id/restoreButton"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@string/gonotes_font_family"
+        android:textAppearance="@style/TextAppearance.MyTheme.Button"
         android:padding="20dp"
         android:text="@string/restore_all_notes"
-        android:textAllCaps="false"
-        android:textSize="@dimen/button_text_size" />
+        android:textAllCaps="false" />
 
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:fontFamily="@string/gonotes_font_family"
+        android:textAppearance="@style/TextAppearance.MyTheme.Button"
         android:padding="20dp"
         android:text="@string/delete_all_notes"
-        android:textAllCaps="false"
-        android:textSize="@dimen/button_text_size" />
+        android:textAllCaps="false"/>
 
 
 </LinearLayout>

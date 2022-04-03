@@ -73,7 +73,10 @@ class NoteAdapter(private val context:FragmentActivity,private var notes : List<
             }
         }
 
-        binding.root.setOnClickListener { NavigationUtils.toEditNote(it) }
+        binding.root.setOnClickListener {
+            val action = ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadat = note)
+            NavigationUtils.toEditNote(it,action)
+        }
 
     }
 

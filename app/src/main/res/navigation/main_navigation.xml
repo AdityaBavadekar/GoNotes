@@ -24,7 +24,13 @@
         android:id="@+id/editNoteFragment"
         android:name="com.adityaamolbavadekar.gonotes.features.note.edit.EditNoteFragment"
         android:label="Edit Note"
-        tools:layout="@layout/fragment_edit_note" />
+        tools:layout="@layout/fragment_edit_note" >
+        <argument
+            android:name="noteMetadat"
+            app:argType="com.adityaamolbavadekar.gonotes.features.note.data.NoteModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/createNoteFragment"
         android:name="com.adityaamolbavadekar.gonotes.features.note.create.CreateNoteFragment"

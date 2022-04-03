@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/note_width"
@@ -8,7 +8,9 @@
     android:layout_marginTop="@dimen/note_margin"
     android:layout_marginEnd="@dimen/note_margin"
     android:layout_marginBottom="@dimen/note_margin"
-    android:longClickable="false"
+    android:clickable="true"
+    android:focusable="true"
+    android:longClickable="true"
     app:cardCornerRadius="25dp"
     app:cardElevation="@dimen/note_corner_radius">
 
@@ -26,10 +28,8 @@
             android:layout_marginTop="@dimen/note_margin"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:fontFamily="@string/gonotes_font_family"
             android:maxLines="3"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
             tools:text="@tools:sample/full_names" />
 
         <TextView
@@ -40,9 +40,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
-            android:fontFamily="@string/gonotes_font_family"
             android:maxLines="20"
-            tools:text="@tools:sample/lorem/random" />
+            android:textAppearance="@style/TextAppearance.MyTheme.Body1"
+            tools:text="@tools:sample/lorem" />
 
         <TextView
             android:id="@+id/label"
@@ -52,13 +52,13 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/label_text_background"
-            android:fontFamily="@string/gonotes_font_family"
             android:maxLines="1"
-            android:visibility="gone"
-            tools:visibility="visible"
             android:paddingHorizontal="10dp"
-            android:paddingVertical="3dp"
-            tools:text="@tools:sample/lorem" />
+            android:paddingVertical="4dp"
+            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+            android:visibility="gone"
+            tools:text="@tools:sample/lorem"
+            tools:visibility="visible" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@string/gonotes_font_family"
+                android:textAppearance="@style/TextAppearance.MyTheme.Body3"
                 tools:text="@tools:sample/date/ddmmyy" />
 
             <LinearLayout
@@ -107,9 +107,9 @@
                     android:id="@+id/favouriteIcon"
                     android:layout_width="@dimen/note_icon_size"
                     android:layout_height="@dimen/note_icon_size"
+                    android:layout_marginEnd="5dp"
                     android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/note_icon_padding"
-                    android:layout_marginEnd="5dp"
                     android:src="@drawable/ic_favorite"
                     android:visibility="gone"
                     tools:visibility="visible" />
@@ -120,4 +120,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
