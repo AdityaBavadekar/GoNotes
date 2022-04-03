@@ -115,3 +115,5 @@ the License.
 
 ```
 See the [LICENSE.md]() file for details.
+
+<meta name="google-site-verification" content="-tze8DtEhCn3b672AdDl88xvBfgPL7jcrgIvMMphvfo" />
