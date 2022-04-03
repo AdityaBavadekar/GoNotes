@@ -1,3 +1,7 @@
+<head>
+<meta name="google-site-verification" content="5zG9lqy-uxXvS-NAI0nmJouy9PFcCQCeZ_l6RjMyXCk" />
+</head>
+
 # GoNotes
 A kitchen for all of your notes, where ideas💡 line up. Build out the imagination into the digital world 🌎. 
 
