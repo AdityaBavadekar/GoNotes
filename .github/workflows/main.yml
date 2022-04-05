@@ -33,7 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Run build on project.
-          gradle
+          gradle wrapper --gradle-version 4.0.0-alpha09
           .\gradlew build 
           ./gradlew build
 
