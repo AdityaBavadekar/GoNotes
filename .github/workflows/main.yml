@@ -34,5 +34,6 @@ jobs:
         run: |
           echo Run build on project.
           gradle wrapper --gradle-version 6.1.1
-          gradlew build 
+          gradle buildEnvironment 
+          gradle build 
 
