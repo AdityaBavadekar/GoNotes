@@ -1,7 +1,9 @@
+[![CI](https://github.com/AdityaBavadekar/GoNotes/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/AdityaBavadekar/GoNotes/actions/workflows/main.yml)
 # GoNotes
 A kitchen for all of your notes, where ideas💡 line up. Build out the imagination into the digital world 🌎. 
 
-![Go Notes Launcher Icon]()
+|![Go Notes Launcher Icon](https://github.com/AdityaBavadekar/GoNotes/blob/master/app/ic_launcher_play_store.png)|
+|----|
 
 # Features
 This app display list of notes you've created earlier. You can create new notes by tapping on '+' icon which guides you to create a new note. You can also edit the previously created notes by clicking on the notes that are shown in the list. You can delete an individual note by clicking it and then in more options menu clicking on delete or you can delete multiple notes at once by long clicking notes in the list of of notes. The notes you've deleted will remain in recycle bin for 30-days and after that they'll  be automatically deleted. You can restore them by clicking on Bin option in menu.
@@ -114,3 +116,5 @@ the License.
 
 ```
 See the [LICENSE.md]() file for details.
+
+<meta name="google-site-verification" content="-tze8DtEhCn3b672AdDl88xvBfgPL7jcrgIvMMphvfo" />
