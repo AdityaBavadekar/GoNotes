@@ -1,3 +1,4 @@
+
 package com.adityaamolbavadekar.gonotes.features.note.data
 
 import android.os.Parcel
@@ -10,20 +11,21 @@ data class NoteModel(
     @PrimaryKey(autoGenerate = true) var id: Int,
     val title: String,
     val body: String,
-    val label: String,//TODO
+    val label: String,
     val created: Long,
     val createdGeneralForm: String,
     val edited: Long,
     val editedGeneralForm: String,
-    val color: Int,
+    val color: String,
     val isPinned: Boolean,
     val isBinned: Boolean,
     val isArchived: Boolean,
     val isFavourite: Boolean,
     val isReminder: Boolean,
-    val isLocked: Boolean
+    val isLocked: Boolean,
+    var itemType: Int = NOTE,
+    var itemTitle: String = ""
 ) : Parcelable {
-
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
@@ -33,21 +35,41 @@ data class NoteModel(
         parcel.readString()!!,
         parcel.readLong(),
         parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readByte() != 0.toByte(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readByte() != 0.toByte(),
+        parcel.readByte() != 0.toByte(),
         parcel.readInt(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte()
+        parcel.readString()!!
     ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(title)
+        parcel.writeString(body)
+        parcel.writeString(label)
+        parcel.writeLong(created)
+        parcel.writeString(createdGeneralForm)
+        parcel.writeLong(edited)
+        parcel.writeString(editedGeneralForm)
+        parcel.writeString(color)
+        parcel.writeByte(if (isPinned) 1 else 0)
+        parcel.writeByte(if (isBinned) 1 else 0)
+        parcel.writeByte(if (isArchived) 1 else 0)
+        parcel.writeByte(if (isFavourite) 1 else 0)
+        parcel.writeByte(if (isReminder) 1 else 0)
+        parcel.writeByte(if (isLocked) 1 else 0)
+        parcel.writeInt(itemType)
+        parcel.writeString(itemTitle)
     }
 
     override fun describeContents(): Int {
         return 0
     }
-
-    override fun writeToParcel(dest: Parcel?, flags: Int) {}
 
     companion object CREATOR : Parcelable.Creator<NoteModel> {
         override fun createFromParcel(parcel: Parcel): NoteModel {
@@ -58,5 +80,9 @@ data class NoteModel(
             return arrayOfNulls(size)
         }
     }
+
+
 }
+
+
 

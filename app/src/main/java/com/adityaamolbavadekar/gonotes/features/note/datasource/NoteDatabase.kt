@@ -12,7 +12,7 @@ import androidx.room.RoomDatabase
 )
 abstract class NoteDatabase : RoomDatabase() {
 
-    abstract val dao : NoteDao
+    abstract val dao: NoteDao
 
     companion object {
 
@@ -22,12 +22,12 @@ abstract class NoteDatabase : RoomDatabase() {
         fun getDatabaseInstance(context: Context): NoteDatabase {
 
             val subInstance = INSTANCE
-            if (subInstance != null){
+            if (subInstance != null) {
                 return subInstance
-            }else{
-                synchronized(this){
+            } else {
+                synchronized(this) {
                     val roomDatabaseINSTANCE = Room.databaseBuilder(
-                        context,NoteDatabase::class.java,"notes_database"
+                        context, NoteDatabase::class.java, "notes_database"
                     ).build()
                     INSTANCE = roomDatabaseINSTANCE
                     return roomDatabaseINSTANCE

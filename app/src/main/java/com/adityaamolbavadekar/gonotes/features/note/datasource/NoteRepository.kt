@@ -1,4 +1,4 @@
-package com.adityaamolbavadekar.gonotes.features.note.data
+package com.adityaamolbavadekar.gonotes.features.note.datasource
 
 import androidx.lifecycle.LiveData
 
