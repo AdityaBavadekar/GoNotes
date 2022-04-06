@@ -6,6 +6,7 @@ import androidx.viewbinding.BuildConfig
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteDatabase
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteRepository
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
 import org.acra.config.mailSender
 import org.acra.data.StringFormat

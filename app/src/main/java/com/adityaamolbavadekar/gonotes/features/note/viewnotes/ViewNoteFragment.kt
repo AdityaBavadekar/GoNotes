@@ -3,23 +3,21 @@ package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.ViewCompat
-import androidx.core.view.ViewGroupCompat
-import androidx.core.view.doOnPreDraw
+import androidx.cardview.widget.CardView
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.adityaamolbavadekar.gonotes.R
 import com.adityaamolbavadekar.gonotes.base.BaseFragment
 import com.adityaamolbavadekar.gonotes.databinding.FragmentViewNotesBinding
+import com.adityaamolbavadekar.gonotes.databinding.InfoCardBinding
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
-import com.adityaamolbavadekar.gonotes.utils.filterBinnedNotes
-import com.adityaamolbavadekar.gonotes.utils.filterFor
-import com.adityaamolbavadekar.gonotes.utils.indefiniteSnack
-import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A Fragment class which shows a list of all notes available in the database.
@@ -64,12 +62,14 @@ class ViewNoteFragment : BaseFragment() {
 
 
     private fun initFab() {
+        /*
         ViewGroupCompat.setTransitionGroup(binding.root,true)
         ViewCompat.setTransitionName(
             binding.addNoteButton,
             getString(R.string.transition_name_add_fab)
-        )
+        )*/
         binding.addNoteButton.setOnClickListener {
+            /*
             val extras = FragmentNavigator.Extras.Builder()
                 .addSharedElement(
                     binding.addNoteButton,
@@ -77,17 +77,20 @@ class ViewNoteFragment : BaseFragment() {
                 )
                 .build()
             val directions = ViewNoteFragmentDirections.actionViewNoteFragmentToCreateNoteFragment()
-            Navigation.findNavController(it).navigate(directions, extras)
+            Navigation.findNavController(it).navigate(directions, extras)*/
+
+            Navigation.findNavController(it)
+                .navigate(R.id.action_viewNoteFragment_to_createNoteFragment)
         }
     }
 
-    private fun initTransition(){
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
-        }
+    private fun initTransition() {
+        /* exitTransition = MaterialElevationScale(false).apply {
+             duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
+         }
+         reenterTransition = MaterialElevationScale(true).apply {
+             duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
+         }*/
     }
 
     private fun initRecyclerView() {
@@ -103,9 +106,15 @@ class ViewNoteFragment : BaseFragment() {
     }
 
     private fun initNotesList() {
-        viewModel.allNotes.observe(viewLifecycleOwner){ notes->
-            notes.let {
-                notesList.addAll(notes.filterBinnedNotes())
+        viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
+            if (!notes.isNullOrEmpty()) {
+                val filtererNotes = mutableListOf<NoteModel>()
+                notes.forEach {
+                    if (!it.isBinned) {
+                        filtererNotes.add(it)
+                    }
+                }
+                notesList.addAll(filtererNotes)
                 adapter.notifyDataSetChanged()
             }
         }
@@ -113,9 +122,9 @@ class ViewNoteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.doOnPreDraw {
+        /*view.doOnPreDraw {
             startPostponedEnterTransition()
-        }
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -156,9 +165,15 @@ class ViewNoteFragment : BaseFragment() {
             initRecyclerView()
             return
         }
-        searchItems = notesList.filterFor(text)
+        searchItems = notesList//.filterFor(text)
         if (searchItems.isEmpty()) {
-            searchView.indefiniteSnack("Not notes found")
+            val snack = Snackbar.make(searchView, "Not notes found", Snackbar.LENGTH_INDEFINITE)
+            snack.setAction(
+                "GOT BACK"
+            ) {
+                snack.dismiss()
+                initRecyclerView()
+            }
         } else {
             changeRecyclerViewConfig()
         }
@@ -179,9 +194,27 @@ class ViewNoteFragment : BaseFragment() {
     }
 
     override fun onWelcomeNeeded() {
+        val infoCardView = mContext!!.findViewById<CardView>(R.id.mainInfoCardRootCardView)
+        val infoTitleTextView = mContext!!.findViewById<TextView>(R.id.textViewTitle)
+        val infoMessageTextView = mContext!!.findViewById<TextView>(R.id.textViewMessage)
+        val infoPositiveButton = mContext!!.findViewById<Button>(R.id.buttonPositive)
+        val infoNegativeButton = mContext!!.findViewById<Button>(R.id.buttonNegative)
 
+        infoTitleTextView.text = "Welcome!"
+        infoMessageTextView.text = "This is the place where you can find your notes and sort them."
+        /*Dismiss i.e. hide when click event takes place*/
+        val dismissBehaviorClickListener = View.OnClickListener { infoCardView.isVisible = false }
+
+        infoPositiveButton.setOnClickListener(dismissBehaviorClickListener)
+        infoNegativeButton.setOnClickListener(dismissBehaviorClickListener)
+        infoTitleTextView.isVisible = true
+        infoMessageTextView.isVisible = true
+        infoPositiveButton.isVisible = true
+        infoNegativeButton.isVisible = true
+        infoCardView.isVisible = true
     }
 
+    override fun setHasMenu(): Boolean = true
     override fun setTag(): String = "ViewNoteFragment"
     override fun setDescription(): String =
         "A Fragment class which shows a list of all notes available in the database."

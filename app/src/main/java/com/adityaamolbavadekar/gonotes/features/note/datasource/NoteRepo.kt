@@ -1,17 +1,20 @@
 package com.adityaamolbavadekar.gonotes.features.note.datasource
 
-import androidx.lifecycle.LiveData
+import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
 
 interface NoteRepo {
+    val allNotes: Flow<List<NoteModel>>
 
-    fun getNotes() : Flow<List<NoteModel>>
-    fun getNoteWithId(ID:String) : Flow<NoteModel>
-    fun getNotesCreatedOn(CREATED_ON:String) : Flow<List<NoteModel>>
-    suspend fun getNotesForLabel(LABEL:String) : Flow<List<NoteModel>>
+    @WorkerThread
     suspend fun insert(NOTE: NoteModel)
-    suspend fun update(NOTE: NoteModel)
-    suspend fun deleteNoteWithId(noteModel: NoteModel)
-    suspend fun deleteAll()
 
+    @WorkerThread
+    suspend fun update(NOTE: NoteModel)
+
+    @WorkerThread
+    suspend fun deleteNote(NOTE: NoteModel)
+
+    @WorkerThread
+    suspend fun deleteAll()
 }

@@ -4,12 +4,11 @@ import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adityaamolbavadekar.gonotes.databinding.ItemSearchBinding
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
-import com.adityaamolbavadekar.gonotes.utils.NavigationUtils
-import com.adityaamolbavadekar.gonotes.utils.toast
 
 class SearchAdapter(
     private val context: FragmentActivity,
@@ -38,12 +37,9 @@ class SearchAdapter(
             binding.searchTitle.text = note.title
             binding.searchSubtitle.text = note.body
             binding.root.setOnClickListener {
-                context.toast(note.id.toString())
-            }
-            binding.root.setOnClickListener {
                 val action =
                     ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadata = note)
-                NavigationUtils.toEditNote(it, action)
+                Navigation.findNavController(it).navigate(action)
             }
         }
     }

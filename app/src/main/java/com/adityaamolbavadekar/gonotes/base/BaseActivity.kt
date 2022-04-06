@@ -9,8 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.adityaamolbavadekar.gonotes.BuildConfig
-import com.adityaamolbavadekar.gonotes.utils.*
+import androidx.viewbinding.BuildConfig
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -20,46 +19,46 @@ abstract class BaseActivity : AppCompatActivity() {
     lateinit var pref: SharedPreferences
     lateinit var navController: NavController
     lateinit var navHostFragment: NavHostFragment
-    private var navigationUiEnabled : Boolean = false
+    private var navigationUiEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
         activityTAG = setTag()
         fragmentDesc = setDescription()
-        mContext!!.onCreateCalled()
+//        mContext!!.onCreateCalled()
         if (BuildConfig.DEBUG) onDebug()
     }
 
     override fun onPause() {
         super.onPause()
-        mContext!!.onPauseCalled()
+//        mContext!!.onPauseCalled()
     }
 
     override fun onStart() {
         super.onStart()
-        mContext!!.onStartCalled()
+//        mContext!!.onStartCalled()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        onDestroyCalled(activityTAG)
+//        onDestroyCalled(activityTAG)
     }
 
     override fun onResume() {
         super.onResume()
-        mContext!!.onResumeCalled()
+//        mContext!!.onResumeCalled()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        mContext!!.onConfigChangeOccurred(newConfig)
+//        mContext!!.onConfigChangeOccurred(newConfig)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return if (navigationUiEnabled){
+        return if (navigationUiEnabled) {
             navController.navigateUp() || super.onSupportNavigateUp()
-        }else super.onSupportNavigateUp()
+        } else super.onSupportNavigateUp()
     }
 
     /**
@@ -87,13 +86,14 @@ abstract class BaseActivity : AppCompatActivity() {
      * @see [NavigationUI.setupActionBarWithNavController]
      *
      * */
-    fun setupNavigation(setup: Boolean = false,@IdRes fragmentContainer : Int? = null){
-        if (!setup || fragmentContainer == null){
+    fun setupNavigation(setup: Boolean = false, @IdRes fragmentContainer: Int? = null) {
+        if (!setup || fragmentContainer == null) {
             navigationUiEnabled = false
             return
         }
-        navHostFragment = supportFragmentManager.findFragmentById(fragmentContainer) as NavHostFragment
-        navController  = navHostFragment.navController
+        navHostFragment =
+            supportFragmentManager.findFragmentById(fragmentContainer) as NavHostFragment
+        navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
         navigationUiEnabled = true
     }

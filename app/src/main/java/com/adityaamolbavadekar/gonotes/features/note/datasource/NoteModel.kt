@@ -1,69 +1,50 @@
-
 package com.adityaamolbavadekar.gonotes.features.note.datasource
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.adityaamolbavadekar.gonotes.utils.NOTE
 
 @Entity(tableName = "notes_table")
 data class NoteModel(
     @PrimaryKey(autoGenerate = true) var id: Int,
-    var title: String,
-    var body: String,
-    var label: String,
-    val created: Long,
-    val createdGeneralForm: String,
-    var edited: Long,
-    var editedGeneralForm: String,
-    var color: String,
-    var isPinned: Boolean,
-    var isBinned: Boolean,
-    var isArchived: Boolean,
-    var isFavourite: Boolean,
-    var isReminder: Boolean,
-    var isLocked: Boolean,
-    var itemType: Int,
-    var itemTitle: String
+    @ColumnInfo(name = "TITLE") var title: String,
+    @ColumnInfo(name = "BODY") var body: String,
+    @ColumnInfo(name = "CREATED") val created: Long,
+    @ColumnInfo(name = "EDITED") var edited: Long,
+    @ColumnInfo(name = "COLOR") var color: String,
+    @ColumnInfo(name = "IS_PINNED") var isPinned: Boolean,
+    @ColumnInfo(name = "IS_BINNED") var isBinned: Boolean,
+    @ColumnInfo(name = "IS_FAVOURITE") var isFavourite: Boolean,
+    @ColumnInfo(name = "ITEM_TYPE") var itemType: Int,
+    @ColumnInfo(name = "ITEM_TITLE") var itemTitle: String
+
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!,
+        parcel.readLong(),
         parcel.readLong(),
         parcel.readString()!!,
-        parcel.readLong(),
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
         parcel.readInt(),
-        parcel.readString()!!
-    ) {
-    }
+        parcel.readString()!!,
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)
         parcel.writeString(body)
-        parcel.writeString(label)
         parcel.writeLong(created)
-        parcel.writeString(createdGeneralForm)
         parcel.writeLong(edited)
-        parcel.writeString(editedGeneralForm)
         parcel.writeString(color)
         parcel.writeByte(if (isPinned) 1 else 0)
         parcel.writeByte(if (isBinned) 1 else 0)
-        parcel.writeByte(if (isArchived) 1 else 0)
         parcel.writeByte(if (isFavourite) 1 else 0)
-        parcel.writeByte(if (isReminder) 1 else 0)
-        parcel.writeByte(if (isLocked) 1 else 0)
         parcel.writeInt(itemType)
         parcel.writeString(itemTitle)
     }
@@ -81,7 +62,6 @@ data class NoteModel(
             return arrayOfNulls(size)
         }
     }
-
 
 }
 

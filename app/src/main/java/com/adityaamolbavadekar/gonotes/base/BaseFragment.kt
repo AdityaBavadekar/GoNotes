@@ -4,15 +4,17 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.View
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.preference.PreferenceManager
-import com.adityaamolbavadekar.gonotes.BuildConfig
+import androidx.viewbinding.BuildConfig
 import com.adityaamolbavadekar.gonotes.GoNotes
 import com.adityaamolbavadekar.gonotes.features.note.viewnotes.NoteViewModelFactory
 import com.adityaamolbavadekar.gonotes.features.note.viewnotes.NotesViewModel
-import com.adityaamolbavadekar.gonotes.utils.*
+import kotlin.properties.Delegates
 
 abstract class BaseFragment : Fragment() {
 
@@ -23,56 +25,63 @@ abstract class BaseFragment : Fragment() {
     lateinit var fragmentTAG: String
     lateinit var fragmentDesc: String
     lateinit var pref: SharedPreferences
+    private var welcomeNeeded by Delegates.notNull<Boolean>()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = requireActivity()
         pref = PreferenceManager.getDefaultSharedPreferences(mContext!!)
+        welcomeNeeded = pref.getBoolean("USER_WELCOMED",false)
         fragmentTAG = setTag()
         fragmentDesc = setDescription()
-        mContext!!.onAttachCalled(fragmentTAG, fragmentDesc)
+//        mContext!!.onAttachCalled(fragmentTAG, fragmentDesc)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContext!!.onCreateCalled()
-        setHasOptionsMenu(true)
+//        mContext!!.onCreateCalled()
+        setHasOptionsMenu(setHasMenu())
         if (BuildConfig.DEBUG) onDebug()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (welcomeNeeded) onWelcomeNeeded()
     }
 
     override fun onPause() {
         super.onPause()
-        mContext!!.onPauseCalled()
+//        mContext!!.onPauseCalled()
     }
 
     override fun onStart() {
         super.onStart()
-        mContext!!.onStartCalled()
+//        mContext!!.onStartCalled()
     }
 
     override fun onStop() {
         super.onStop()
-        mContext!!.onStopCalled()
+//        mContext!!.onStopCalled()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        onDestroyCalled(fragmentTAG)
+//        onDestroyCalled(fragmentTAG)
     }
 
     override fun onResume() {
         super.onResume()
-        mContext!!.onResumeCalled()
+//        mContext!!.onResumeCalled()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
-        mContext!!.onConfigChangeOccurred(newConfig)
+//        mContext!!.onConfigChangeOccurred(newConfig)
     }
 
     override fun onDetach() {
         super.onDetach()
-        onDetachCalled(fragmentTAG)
+//        onDetachCalled(fragmentTAG)
     }
 
     /**
@@ -81,12 +90,31 @@ abstract class BaseFragment : Fragment() {
     abstract fun onDebug()
 
     /**
+     * Called inside [onViewCreated].
+     *
      * Called only if the user has not seed this screen before or not tapped on
      * "Got it"/"Ok" button.
      *
-     * Implement the [InfoCardView] here.
+     * Implement the InfoCardView or ShowcaseView here.
      */
     abstract fun onWelcomeNeeded()
+
+    /**
+     * Called inside [onPause].
+     *
+     * Sets value of [onWelcomeNeeded] to `false` from next run.
+     *
+     */
+    fun setIsWelcomeNeeded(boolean: Boolean){
+        pref.edit { putBoolean("WELCOME_NEEDED",boolean) }
+        welcomeNeeded = boolean
+    }
+
+    /**
+     * Called for [setHasOptionsMenu]
+     *
+     */
+    abstract fun setHasMenu(): Boolean
 
     /**
      * Called to set Logging TAG.

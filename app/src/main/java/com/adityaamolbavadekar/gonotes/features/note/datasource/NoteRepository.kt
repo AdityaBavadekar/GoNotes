@@ -1,6 +1,5 @@
 package com.adityaamolbavadekar.gonotes.features.note.datasource
 
-import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,37 +9,15 @@ import kotlinx.coroutines.flow.Flow
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
  * @since **April, 2022** *
  */
-@Suppress("RedundantSuspendModifier")
-class NoteRepository(private val dao: NoteDao) {
+class NoteRepository(private val dao: NoteDao) : NoteRepo {
 
-    val allNotes: Flow<List<NoteModel>> = dao.getNotes()
-/*
-    val binNotes: Flow<List<NoteModel>> = dao.getBinnedNotes()
-    val normalNotes: Flow<List<NoteModel>> = dao.getNormalNotes()
-    fun getNoteWithId(ID: Int): Flow<NoteModel> = dao.getNoteWithId(ID)
-    fun getNotesCreatedOn(CREATED_ON: String): Flow<List<NoteModel>> = dao.getNotesCreatedOn(CREATED_ON)
-    suspend fun getNotesForLabel(LABEL: String): Flow<List<NoteModel>> = dao.getNotesForLabel(LABEL)
-*/
+    override val allNotes: Flow<List<NoteModel>> = dao.getNotes()
 
-    @WorkerThread
-    suspend fun insert(NOTE: NoteModel) {
-        dao.insert(NOTE)
-    }
+    override suspend fun insert(NOTE: NoteModel) = dao.insert(NOTE)
 
-    @WorkerThread
-    suspend fun update(NOTE: NoteModel) {
-        dao.update(NOTE)
-    }
-/*
-    @WorkerThread
-    suspend fun deleteNoteWithId(noteModel: NoteModel) {
-        dao.deleteNote(noteModel)
-    }
+    override suspend fun update(NOTE: NoteModel) = dao.update(NOTE)
 
-    */
-    @WorkerThread
-    suspend fun deleteAll() {
-        dao.deleteAll()
-    }
+    override suspend fun deleteNote(NOTE: NoteModel) = dao.deleteNote(NOTE)
 
+    override suspend fun deleteAll() = dao.deleteAll()
 }

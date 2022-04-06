@@ -106,4 +106,6 @@
     <string name="transition_name_add_fab">add_fab</string>
     <string name="transition_name_edit_note">edit_note</string>
     <string name="transition_name_create_note">create_note</string>
+    <string name="infocard_button_text_got_it">Got it</string>
+    <string name="infocard_button_text_learn_more">Learn more</string>
 </resources>

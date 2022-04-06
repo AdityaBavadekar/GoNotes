@@ -4,13 +4,10 @@ import androidx.lifecycle.*
 import com.adityaamolbavadekar.gonotes.features.note.colors.GoNotesColors
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteRepository
-import com.adityaamolbavadekar.gonotes.utils.NOTE
-import com.adityaamolbavadekar.gonotes.utils.createdGeneralFormType
+import com.adityaamolbavadekar.gonotes.usecases.create.NoteUtils
 import com.hypertrack.hyperlog.HyperLog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  *
@@ -24,65 +21,35 @@ class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
 
     val allNotes: LiveData<List<NoteModel>> = repository.allNotes.asLiveData()
     private val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val loadingState: LiveData<Boolean> = isLoading
 
-    fun getLoadingState(): LiveData<Boolean> {
-        return isLoading
-    }
-
-    fun createSimpleNote(
-        title: String,
-        body: String,
-        colors: GoNotesColors = GoNotesColors.Blue,
-        isPinned: Boolean = false,
-        isFavourite: Boolean = false
-    ) {
-        val time = System.currentTimeMillis()
-        val timeFormat = SimpleDateFormat(
-            createdGeneralFormType, Locale.ENGLISH
-        ).format(Date()).toString()
-        val noteItem = NoteModel(
-            id = 0,
-            title = title,
-            body = body,
-            label = "",
-            created = time,
-            createdGeneralForm = timeFormat,
-            edited = time,
-            editedGeneralForm = timeFormat,
-            color = colors.name,
-            isPinned = isPinned,
-            isBinned = false/*Not yet implemented*/,
-            isArchived = false/*Not yet implemented*/,
-            isFavourite = isFavourite,
-            isReminder = false,
-            isLocked = false/*Not yet implemented*/,
-            NOTE,
-            ""
-        )
-        insertNote(note = noteItem)
-    }
-
-    private fun insertNote(note: NoteModel) = viewModelScope.launch { repository.insert(note) }
+    fun insertNote(note: NoteModel) = viewModelScope.launch { repository.insert(note) }
 
     fun updateNote(note: NoteModel) = viewModelScope.launch { repository.update(note) }
 
     fun loadNotes() {
         val start = System.currentTimeMillis()
-        HyperLog.i("ViewModel","Loading Notes...")
+        HyperLog.i("ViewModel", "Loading Notes...")
         when (val list = allNotes.value) {
             null -> {
-                HyperLog.d("ViewModel","Notes not found posting delay.")
+                HyperLog.d("ViewModel", "Notes not found posting delay.")
                 postDelay()
             }
             else -> {
-                HyperLog.d("ViewModel","${list.size} Notes found in ${System.currentTimeMillis()-start}ms.")
-                HyperLog.d("ViewModel","Counting notes inside bin...")
+                HyperLog.d(
+                    "ViewModel",
+                    "${list.size} Notes found in ${System.currentTimeMillis() - start}ms."
+                )
+                HyperLog.d("ViewModel", "Counting notes inside bin...")
                 val bin = mutableListOf<NoteModel>()
                 list.forEach {
-                    if(it.isBinned) bin.add(it)
+                    if (it.isBinned) bin.add(it)
                 }
-                HyperLog.d("ViewModel",if (bin.isNotEmpty())"${bin.size} notes found inside bin." else "No notes found inside bin.")
-                HyperLog.d("ViewModel","Posting delay.")
+                HyperLog.d(
+                    "ViewModel",
+                    if (bin.isNotEmpty()) "${bin.size} notes found inside bin." else "No notes found inside bin."
+                )
+                HyperLog.d("ViewModel", "Posting delay.")
                 postDelay()
             }
         }
@@ -92,35 +59,11 @@ class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
         viewModelScope.launch {
             for (i in 1..15) {
                 val time = System.currentTimeMillis()
-                val isEven =
-                    "$i".endsWith("2") || "$i".endsWith("4") || "$i".endsWith("6") || "$i".endsWith(
-                        "8"
-                    ) || "$i".endsWith("0")
-                val isEndingWithZero = "$i".endsWith("0")
-                val tempNote =
-                    NoteModel(
-                        0,
-
-                        "Note $i",
-                        "Hello I am note number $i, I am supper loooooooooooooog. You can click me to edit me or view my full details",
-                        "#Label$i",
-                        time,
-                        SimpleDateFormat(
-                            createdGeneralFormType, Locale.ENGLISH
-                        ).format(Date()).toString(),
-                        time,
-                        "Not yet edited",
-
-                        GoNotesColors.Blue.name,
-                        isEven,
-                        isBinned = false,
-                        isArchived = false,
-                        isFavourite = isEven,
-                        false,
-                        isEndingWithZero,
-                        NOTE,
-                        ""
-                    )
+                val tempNote = NoteUtils.Creator()
+                    .withTitle("Note $i")
+                    .withBody("Hello I am note number $i, I am supper loooooooooooooog. You can click me to edit me or view my full details",)
+                    .withFavourite(true)
+                    .build()
                 insertNote(tempNote)
             }
         }

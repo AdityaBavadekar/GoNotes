@@ -6,8 +6,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.adityaamolbavadekar.gonotes.features.note.colors.GoNotesColors
-import com.adityaamolbavadekar.gonotes.utils.NOTE
-import com.adityaamolbavadekar.gonotes.utils.createdGeneralFormType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -23,7 +21,6 @@ abstract class NoteDatabase : RoomDatabase() {
     abstract val dao: NoteDao
 
     companion object {
-
         @Volatile
         private var INSTANCE: NoteDatabase? = null
         fun getDatabase(context: Context, scope: CoroutineScope): NoteDatabase {
@@ -54,42 +51,29 @@ abstract class NoteDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(noteDao: NoteDao) {
             noteDao.deleteAll()
-            val note = createSimpleNote(
-                "Welcome, this note is for demonstration purpose.",
-                "Write you description here..."
-            )
+            val note = createSimpleNote()
             noteDao.insert(note)
         }
 
         fun createSimpleNote(
-            title: String,
-            body: String,
-            colors: GoNotesColors = GoNotesColors.Blue,
-            isPinned: Boolean = false,
-            isFavourite: Boolean = false
+            colors: GoNotesColors = GoNotesColors.Blue
         ): NoteModel {
             val time = System.currentTimeMillis()
             val timeFormat = SimpleDateFormat(
-                createdGeneralFormType, Locale.ENGLISH
+                "dd MMM H:mm", Locale.ENGLISH
             ).format(Date()).toString()
             return NoteModel(
                 id = 0,
-                title = title,
-                body = body,
-                label = "",
+                title = "Welcome to Go Notes app!",
+                body = "",
                 created = time,
-                createdGeneralForm = timeFormat,
                 edited = time,
-                editedGeneralForm = timeFormat,
                 color = colors.name,
-                isPinned = isPinned,
-                isBinned = false/*Not yet implemented*/,
-                isArchived = false/*Not yet implemented*/,
-                isFavourite = isFavourite,
-                isReminder = false,
-                isLocked = false/*Not yet implemented*/,
-                NOTE,
-                ""
+                isPinned = false,
+                isBinned = false,
+                isFavourite = false,
+                itemType = 0,
+                itemTitle = ""
             )
         }
 

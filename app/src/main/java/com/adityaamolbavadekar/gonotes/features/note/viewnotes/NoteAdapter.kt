@@ -1,7 +1,6 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
@@ -10,9 +9,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adityaamolbavadekar.gonotes.R
 import com.adityaamolbavadekar.gonotes.databinding.ItemNoteBinding
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  *
@@ -45,11 +45,15 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
         holder.apply {
             binding.title.text = note.title
             binding.body.text = note.body
-            binding.timestamp.text = note.createdGeneralForm
+            binding.timestamp.text =
+                SimpleDateFormat("dd MMM H:mm", Locale.ENGLISH).format(Date(note.created))
+/*
             if (note.label.isNotEmpty()) {
                 binding.label.text = note.label
                 binding.label.isVisible = true
             }
+
+            */
             handleNoteSettings(note, binding)
             ViewCompat.setTransitionName(binding.root, note.id.toString())
             binding.root.setOnClickListener {
@@ -61,24 +65,24 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
     }
 
     private fun handleNoteSettings(note: NoteModel, binding: ItemNoteBinding) {
-        if (note.isLocked) {
-            binding.body.text = context.getString(R.string.note_is_locked)
-            binding.body.setTextColor(Color.RED)
-            binding.favouriteIcon.isVisible = false
-            binding.pinnedIcon.isVisible = false
-            binding.label.isVisible = false
-            binding.lockedIcon.isVisible = true
-            ViewCompat.setTooltipText(binding.lockedIcon, "Locked")
-        } else {
-            if (note.isFavourite) {
-                binding.favouriteIcon.isVisible = true
-                ViewCompat.setTooltipText(binding.favouriteIcon, "Favourite")
-            }
-            if (note.isPinned) {
-                binding.pinnedIcon.isVisible = true
-                ViewCompat.setTooltipText(binding.pinnedIcon, "Pinned")
-            }
+        /* if (note.isLocked) {
+             binding.body.text = context.getString(R.string.note_is_locked)
+             binding.body.setTextColor(Color.RED)
+             binding.favouriteIcon.isVisible = false
+             binding.pinnedIcon.isVisible = false
+             binding.label.isVisible = false
+             binding.lockedIcon.isVisible = true
+             ViewCompat.setTooltipText(binding.lockedIcon, "Locked")
+         } else {*/
+        if (note.isFavourite) {
+            binding.favouriteIcon.isVisible = true
+            ViewCompat.setTooltipText(binding.favouriteIcon, "Favourite")
         }
+        if (note.isPinned) {
+            binding.pinnedIcon.isVisible = true
+            ViewCompat.setTooltipText(binding.pinnedIcon, "Pinned")
+        }
+//        }
     }
 
     override fun getItemCount(): Int {
