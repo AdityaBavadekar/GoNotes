@@ -9,6 +9,7 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.preference.PreferenceManager
 import androidx.viewbinding.BuildConfig
 import com.adityaamolbavadekar.gonotes.GoNotes
@@ -18,6 +19,12 @@ import kotlin.properties.Delegates
 
 abstract class BaseFragment : Fragment() {
 
+    /** [viewModels] gives you the ViewModel instance scoped to the current fragment.
+     * This will be different for different fragments.
+     *
+     * [activityViewModels] gives you the ViewModel instance scoped to the current activity.
+     * Therefore the instance will remain the same across multiple fragments in the same activity.
+     * */
     val viewModel: NotesViewModel by activityViewModels {
         NoteViewModelFactory((requireActivity().application as GoNotes).repository)
     }
@@ -39,7 +46,6 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        mContext!!.onCreateCalled()
         setHasOptionsMenu(setHasMenu())
         if (BuildConfig.DEBUG) onDebug()
     }
@@ -47,41 +53,6 @@ abstract class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (welcomeNeeded) onWelcomeNeeded()
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        mContext!!.onPauseCalled()
-    }
-
-    override fun onStart() {
-        super.onStart()
-//        mContext!!.onStartCalled()
-    }
-
-    override fun onStop() {
-        super.onStop()
-//        mContext!!.onStopCalled()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        onDestroyCalled(fragmentTAG)
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        mContext!!.onResumeCalled()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-//        mContext!!.onConfigChangeOccurred(newConfig)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-//        onDetachCalled(fragmentTAG)
     }
 
     /**

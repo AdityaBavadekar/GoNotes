@@ -1,9 +1,12 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.*
+import androidx.preference.PreferenceManager
 import com.adityaamolbavadekar.gonotes.features.note.colors.GoNotesColors
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteRepository
+import com.adityaamolbavadekar.gonotes.usecases.Themes
 import com.adityaamolbavadekar.gonotes.usecases.create.NoteUtils
 import com.hypertrack.hyperlog.HyperLog
 import kotlinx.coroutines.delay
@@ -20,8 +23,8 @@ import kotlinx.coroutines.launch
 class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
 
     val allNotes: LiveData<List<NoteModel>> = repository.allNotes.asLiveData()
-    private val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
-    val loadingState: LiveData<Boolean> = isLoading
+    private val _isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
+    val isLoading: LiveData<Boolean> = _isLoading
 
     fun insertNote(note: NoteModel) = viewModelScope.launch { repository.insert(note) }
 
@@ -72,7 +75,7 @@ class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
     private fun postDelay() {
         viewModelScope.launch {
             delay(1500)
-            isLoading.postValue(false)
+            _isLoading.postValue(false)
         }
     }
 

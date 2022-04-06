@@ -4,17 +4,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.viewbinding.BuildConfig
+import com.adityaamolbavadekar.gonotes.GoNotes
 
 abstract class BaseActivity : AppCompatActivity() {
 
     var mContext: Context? = null
-    private lateinit var activityTAG: String
+    private var TAG: String = "BaseActivity"
     private lateinit var fragmentDesc: String
     lateinit var pref: SharedPreferences
     lateinit var navController: NavController
@@ -24,35 +29,41 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
-        activityTAG = setTag()
+        TAG = setTag()
         fragmentDesc = setDescription()
-//        mContext!!.onCreateCalled()
+        Log.d(TAG, "onStart Called")
         if (BuildConfig.DEBUG) onDebug()
-    }
-
-    override fun onPause() {
-        super.onPause()
-//        mContext!!.onPauseCalled()
     }
 
     override fun onStart() {
         super.onStart()
-//        mContext!!.onStartCalled()
+        Log.d(TAG, "onStart Called")
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        onDestroyCalled(activityTAG)
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart Called")
     }
-
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause Called")
+    }
     override fun onResume() {
         super.onResume()
-//        mContext!!.onResumeCalled()
+        Log.d(TAG, "onResume Called")
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy Called")
     }
 
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-//        mContext!!.onConfigChangeOccurred(newConfig)
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        Log.d(TAG, "onDetachedFromWindow Called for context : ${window.context}")
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        Log.d(TAG, "onDetachedFromWindow Called")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -98,11 +109,25 @@ abstract class BaseActivity : AppCompatActivity() {
         navigationUiEnabled = true
     }
 
+    private var isFullScreen : Boolean = false
+
     /**
      * Configures app to change to fullScreen mode.
      * */
     fun toggleFullScreen() {
-
+        val windowInsetsController =
+            ViewCompat.getWindowInsetsController(window.decorView) ?: return
+        if (!isFullScreen) {
+            isFullScreen = true
+            windowInsetsController.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+        }else{
+            isFullScreen = false
+            windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+        }
     }
+
+
 
 }

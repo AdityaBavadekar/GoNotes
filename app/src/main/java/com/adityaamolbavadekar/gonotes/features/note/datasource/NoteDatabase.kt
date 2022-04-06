@@ -5,11 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.adityaamolbavadekar.gonotes.features.note.colors.GoNotesColors
+import com.adityaamolbavadekar.gonotes.usecases.create.NoteUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 @Database(
     entities = [NoteModel::class],
@@ -51,32 +49,12 @@ abstract class NoteDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(noteDao: NoteDao) {
             noteDao.deleteAll()
-            val note = createSimpleNote()
+            val note = NoteUtils.Creator()
+                .withTitle("Welcome to Go Notes app!")
+                .withBody("This note is for demonstration purpose")
+                .build()
             noteDao.insert(note)
         }
-
-        fun createSimpleNote(
-            colors: GoNotesColors = GoNotesColors.Blue
-        ): NoteModel {
-            val time = System.currentTimeMillis()
-            val timeFormat = SimpleDateFormat(
-                "dd MMM H:mm", Locale.ENGLISH
-            ).format(Date()).toString()
-            return NoteModel(
-                id = 0,
-                title = "Welcome to Go Notes app!",
-                body = "",
-                created = time,
-                edited = time,
-                color = colors.name,
-                isPinned = false,
-                isBinned = false,
-                isFavourite = false,
-                itemType = 0,
-                itemTitle = ""
-            )
-        }
-
 
     }
 

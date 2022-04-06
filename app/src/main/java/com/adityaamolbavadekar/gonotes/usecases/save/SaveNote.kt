@@ -1,9 +1,7 @@
 package com.adityaamolbavadekar.gonotes.usecases.save
 
-class SaveNote {
+import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
 
-    fun setNote(noteModel:NoteModel):SaveNote {
-        return this
-    }
+class SaveNote {
 
 }
