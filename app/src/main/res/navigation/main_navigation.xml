@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/viewNoteFragment"
-        android:name="com.adityaamolbavadekar.gonotes.features.note.view.ViewNoteFragment"
+        android:name="com.adityaamolbavadekar.gonotes.features.note.viewnotes.ViewNoteFragment"
         android:label="Go Notes"
         tools:layout="@layout/fragment_view_notes">
         <action
@@ -24,12 +24,11 @@
         android:id="@+id/editNoteFragment"
         android:name="com.adityaamolbavadekar.gonotes.features.note.edit.EditNoteFragment"
         android:label="Edit Note"
-        tools:layout="@layout/fragment_edit_note" >
+        tools:layout="@layout/fragment_edit_note">
         <argument
-            android:name="noteMetadat"
-            app:argType="com.adityaamolbavadekar.gonotes.features.note.data.NoteModel"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:name="noteMetadata"
+            app:argType="com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel"
+            />
     </fragment>
     <fragment
         android:id="@+id/createNoteFragment"
@@ -41,4 +40,15 @@
         android:name="com.adityaamolbavadekar.gonotes.features.bin.BinFragment"
         android:label="Notes Bin"
         tools:layout="@layout/fragment_bin" />
+    <fragment
+        android:id="@+id/launcherFragment"
+        android:label=""
+        android:name="com.adityaamolbavadekar.gonotes.features.launcher.LauncherFragment"
+        tools:layout="@layout/fragment_launcher">
+        <action
+            android:id="@+id/action_launcherFragment_to_viewNoteFragment"
+            app:destination="@id/viewNoteFragment"
+            app:popUpTo="@id/viewNoteFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

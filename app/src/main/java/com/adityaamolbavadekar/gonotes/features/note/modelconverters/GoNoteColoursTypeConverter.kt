@@ -1,9 +1,7 @@
-package com.adityaamolbavadekar.gonotes.features.note.typeconverters
+package com.adityaamolbavadekar.gonotes.features.note.modelconverters
 
 import androidx.room.TypeConverter
 import com.adityaamolbavadekar.gonotes.features.note.colors.GoNotesColors
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class GoNoteColoursTypeConverter {
 

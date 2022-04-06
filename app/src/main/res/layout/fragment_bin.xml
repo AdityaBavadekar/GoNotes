@@ -1,38 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fontFamily="@string/gonotes_font_family"
-        android:gravity="center"
-        android:padding="25dp"
-        android:text="@string/bin_header"
-        android:textSize="@dimen/text_size_extra_large" />
-
-
-    <Button
-        android:id="@+id/restoreButton"
-        android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.MyTheme.Button"
-        android:padding="20dp"
-        android:text="@string/restore_all_notes"
-        android:textAllCaps="false" />
+        android:background="?colorPrimary"
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/binnedNotesRecyclerView">
 
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textAppearance="@style/TextAppearance.MyTheme.Button"
-        android:padding="20dp"
-        android:text="@string/delete_all_notes"
-        android:textAllCaps="false"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:title="@string/bin_title"
+            tools:menu="@menu/menu_view_note" />
 
+        <include layout="@layout/info_card" />
 
-</LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/binnedNotesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginBottom="56dp"
+        android:background="@android:color/transparent"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        app:spanCount="2"
+        tools:listitem="@layout/item_note" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/binBottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:menu="@menu/menu_view_note" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,4 +1,4 @@
-package com.adityaamolbavadekar.gonotes.features.note.view
+package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
 import android.content.SharedPreferences
 import android.graphics.Color
@@ -51,10 +51,10 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
                 binding.label.isVisible = true
             }
             handleNoteSettings(note, binding)
-            ViewCompat.setTransitionName(binding.root,note.id.toString())
+            ViewCompat.setTransitionName(binding.root, note.id.toString())
             binding.root.setOnClickListener {
                 val action =
-                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadat = note)
+                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadata = note)
                 Navigation.findNavController(it).navigate(action)
             }
         }
@@ -84,4 +84,5 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
     override fun getItemCount(): Int {
         return notes.size
     }
+
 }

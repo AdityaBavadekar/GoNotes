@@ -5,16 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:transitionGroup="true"
+    android:transitionName="@string/transition_name_create_note"
     android:paddingTop="10dp">
 
-    <ScrollView
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorSurface"
+        app:layout_anchorGravity="top"
+        app:liftOnScroll="true">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@android:color/transparent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleTextColor="?attr/colorPrimary"
+            tools:menu="@menu/menu_view_note"
+            tools:title="Create note" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginEnd="10dp"
         android:paddingStart="15dp"
         android:paddingEnd="3dp"
         android:scrollbarSize="2dp"
-        android:scrollbarStyle="outsideOverlay">
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,17 +48,40 @@
             android:layout_marginEnd="5dp"
             android:orientation="vertical">
 
+            <!--
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Colour"
+                            android:textAppearance="@style/TextAppearance.MyTheme.BodyHeader" />
+            -->
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:visibility="gone"
+                android:entries="@array/format"
+                android:focusable="true"
+                android:paddingHorizontal="15dp"
+                android:paddingVertical="10dp" />
+
+
             <EditText
                 android:id="@+id/noteTitleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/edit_note_edit_text_background"
                 android:hint="@string/note_title_text"
                 android:inputType="textMultiLine"
-                android:maxLines="15"
                 android:padding="20dp"
                 android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
-                tools:text="@tools:sample/full_names" />
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                tools:maxLines="5"
+                tools:text="@tools:sample/lorem/random" />
+
 
             <EditText
                 android:id="@+id/noteBodyEditText"
@@ -53,23 +102,12 @@
                 android:layout_marginTop="10dp" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
         app:menu="@menu/menu_edit_note_bottom_bar" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fontFamily="@string/gonotes_font_family"
-        android:gravity="center"
-        android:padding="25dp"
-        android:text="@string/edit_note_header"
-        android:textSize="@dimen/text_size_extra_large"
-        android:visibility="gone" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

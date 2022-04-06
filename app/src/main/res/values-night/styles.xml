@@ -54,6 +54,9 @@
         <item name="colorOnError">@color/black_900</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="preferenceTheme">@style/Base.Theme.GoNotes</item>
+        <item name="preferenceScreenStyle">@style/Base.Theme.GoNotes</item>
+        <item name="preferenceStyle">@style/Base.Theme.GoNotes</item>
     </style>
 
 

@@ -1,4 +1,4 @@
-package com.adityaamolbavadekar.gonotes.features.note.view
+package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
 import android.os.Bundle
 import android.view.*
@@ -103,10 +103,12 @@ class ViewNoteFragment : BaseFragment() {
     }
 
     private fun initNotesList() {
-        viewModel.getNotesList().observe(viewLifecycleOwner, { items ->
-            notesList.addAll(items.filterBinnedNotes())
-            adapter.notifyDataSetChanged()
-        })
+        viewModel.allNotes.observe(viewLifecycleOwner){ notes->
+            notes.let {
+                notesList.addAll(notes.filterBinnedNotes())
+                adapter.notifyDataSetChanged()
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

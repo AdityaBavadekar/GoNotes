@@ -19,7 +19,16 @@
     </style>
 
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
-    <style name="Theme.GoNotes.App" parent="Base.Theme.GoNotes"/>
+    <style name="Theme.GoNotes.App" parent="Base.Theme.GoNotes">
+        <item name="preferenceTheme">@style/Base.Theme.GoNotes</item>
+        <item name="preferenceScreenStyle">@style/Base.Theme.GoNotes</item>
+        <item name="preferenceStyle">@style/Base.Theme.GoNotes</item>
+        <item name="android:preferenceTheme">@style/Base.Theme.GoNotes</item>
+        <item name="android:preferenceScreenStyle">@style/Base.Theme.GoNotes</item>
+        <item name="android:preferenceStyle">@style/Base.Theme.GoNotes</item>
+        <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.MyTheme.BodyHeader</item>
+        <item name="android:preferenceFragmentStyle">@style/Base.Theme.GoNotes</item>
+    </style>
     <!--Base custom theme which will be shared between both light and dark theme variants-->
     <style name="Base.Theme.GoNotes" parent="Base.Theme.GoNotesMaterialTheme">
         <!--Material color attributes (light theme) -->
@@ -59,6 +68,7 @@
         <item name="textAppearanceButton">@style/TextAppearance.MyTheme.Button</item>
         <item name="textAppearanceCaption">@style/TextAppearance.MyTheme.Caption</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MyTheme.Overline</item>
+        <item name="android:textAppearanceListItem">@style/TextAppearance.MyTheme.Body1</item>
         <!--Material shape attributes-->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.GoNotes.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.GoNotes.MediumComponent</item>
@@ -68,6 +78,8 @@
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GoNotes.BottomSheetDialog</item>
         <item name="navigationViewStyle">@style/Widget.GoNotes.NavigationView</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+        <item name="switchStyle">@style/Widget.GoNotes.Swicth</item>
+        <item name="android:switchPreferenceStyle">@style/Widget.GoNotes.Swicth</item>
 
     </style>
 

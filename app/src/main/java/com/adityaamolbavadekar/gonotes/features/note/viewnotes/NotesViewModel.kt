@@ -1,9 +1,7 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
-import android.content.Context
 import androidx.lifecycle.*
 import com.adityaamolbavadekar.gonotes.features.note.colors.GoNotesColors
-import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteDatabase
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteRepository
 import com.adityaamolbavadekar.gonotes.utils.NOTE
@@ -22,17 +20,9 @@ import java.util.*
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
  * @since **April, 2022** *
  */
-class ViewNotesViewModel(private val repository: NoteRepository) : ViewModel() {
+class NotesViewModel(private val repository: NoteRepository) : ViewModel() {
 
-
-    private lateinit var repo: NoteRepository
-    private val notes: MutableLiveData<List<NoteModel>> by lazy {
-        MutableLiveData<List<NoteModel>>().also {
-            loadNotes()
-        }
-    }
     val allNotes: LiveData<List<NoteModel>> = repository.allNotes.asLiveData()
-
     private val isLoading: MutableLiveData<Boolean> = MutableLiveData(true)
 
     fun getLoadingState(): LiveData<Boolean> {
@@ -76,31 +66,26 @@ class ViewNotesViewModel(private val repository: NoteRepository) : ViewModel() {
 
     fun updateNote(note: NoteModel) = viewModelScope.launch { repository.update(note) }
 
-    private fun loadNotes() {
+    fun loadNotes() {
         val start = System.currentTimeMillis()
         HyperLog.i("ViewModel","Loading Notes...")
-        val list = allNotes.value
-
-        when (list) {
+        when (val list = allNotes.value) {
             null -> {
-                HyperLog.i("ViewModel","Notes not found posting delay")
+                HyperLog.d("ViewModel","Notes not found posting delay.")
                 postDelay()
             }
             else -> {
-                HyperLog.i("ViewModel","${list.size} Notes found in ${System.currentTimeMillis()-start}ms.")
-                val labels = mutableListOf<String>()
+                HyperLog.d("ViewModel","${list.size} Notes found in ${System.currentTimeMillis()-start}ms.")
+                HyperLog.d("ViewModel","Counting notes inside bin...")
+                val bin = mutableListOf<NoteModel>()
                 list.forEach {
-                    it.isBinned
+                    if(it.isBinned) bin.add(it)
                 }
-                HyperLog.i("ViewModel","Posting delay")
+                HyperLog.d("ViewModel",if (bin.isNotEmpty())"${bin.size} notes found inside bin." else "No notes found inside bin.")
+                HyperLog.d("ViewModel","Posting delay.")
                 postDelay()
             }
         }
-    }
-
-    fun getRepo(context: Context) {
-        val dao = NoteDatabase.getDatabaseInstance(context).dao
-        repo = NoteRepository(dao)
     }
 
     fun generateNotes() {

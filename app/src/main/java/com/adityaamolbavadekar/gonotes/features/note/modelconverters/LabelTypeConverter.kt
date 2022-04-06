@@ -1,4 +1,4 @@
-package com.adityaamolbavadekar.gonotes.features.note.typeconverters
+package com.adityaamolbavadekar.gonotes.features.note.modelconverters
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

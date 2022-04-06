@@ -1,6 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?colorSurface">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="20dp">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="@string/large_image"
+            tools:visibility="visible"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iconImageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/small_icon"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:src="@drawable/ic_baseline_image_24" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:paddingTop="6dp"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+                    android:visibility="gone"
+                    tools:maxLines="2"
+                    tools:text="@tools:sample/lorem"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/textViewMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="15dp"
+                    android:visibility="gone"
+                    tools:maxLines="5"
+                    tools:text="@tools:sample/lorem/random"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttonHolderLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonNegative"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.MyTheme.ButtonSmall"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_marginStart="50dp"
+                tools:text="Learn more"
+                tools:visibility="visible" />
+
+            <FrameLayout
+                android:id="@+id/infoIconFrame1"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible">
+
+                <FrameLayout
+                    android:id="@+id/infoIconFrame2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="?selectableItemBackgroundBorderless"
+                    tools:ignore="UselessParent">
+
+                    <ImageView
+                        android:id="@+id/infoIconImageView"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:contentDescription="@string/view_more_information_icon"
+                        android:layout_gravity="center"
+                        tools:src="@drawable/ic_info" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/buttonPositive"
+                style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:padding="5dp"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.MyTheme.ButtonSmall"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Got it" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

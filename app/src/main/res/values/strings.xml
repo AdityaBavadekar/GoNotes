@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Go Notes</string>
-    <string name="about_header">Hello, I am About Fragment</string>
+    <string name="about_header">About Go Notes</string>
     <string name="login_header">Hello, I am Login Fragment</string>
     <string name="settings_header">Hello, I am Settings Fragment</string>
     <string name="backup_header">Backup and Sync</string>
@@ -32,6 +32,8 @@
     <string name="create_note_header">Hello, I am Create Note Fragment</string>
     <string name="welcome_header">Hello, I am Welcome Fragment</string>
     <string name="bin_header">Hello, I am Bin Fragment</string>
+    <string name="bin_title">Recycle Bin</string>
+    <string name="bin_details">Notes deleted are stored here by default for 30-days. You can restore these notes or delete them forever. \nAfter 30-days these notes are automatically deleted.</string>
     <string name="launcher_header">Hello, I am Launcher Fragment</string>
     <string name="gonotes_font_family">sans-serif-light</string>
     <string name="signin_with_google">SignIn with Google</string>
@@ -70,4 +72,38 @@
     <string name="update_text">Update</string>
     <string name="note_is_locked">Note is Locked</string>
     <string name="backup_drop_down_prefix_text">Back up :</string>
+    <string name="icon_text">icon</string>
+    <string name="large_image">Large Image</string>
+    <string name="small_icon">Small Icon</string>
+    <string name="view_more_information_icon">View more information icon</string>
+    <string name="about_app_name_version_name">Go Notes version 1.2022.1</string>
+    <string name="about_app_copyright">© 2022 Aditya Bavadekar</string>
+    <string name="help_header">Help</string>
+    <string name="get_help_header">Get help</string>
+    <string name="faqs_text">FAQs</string>
+    <string name="feedback_header">Feedback</string>
+    <string name="give_feedback">Give feedback</string>
+    <string name="report_a_problem">Report a problem</string>
+    <string name="suggest_a_new_feature">Suggest a new feature</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="about_text">About</string>
+    <string name="open_source_licences">Open-source licences</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string-array name="gonote_colours">
+        <item>Cyan</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Grey</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+    </string-array>
+    <string-array name="format">
+        <item>Plain Text</item>
+        <item>Markdown</item>
+    </string-array>
+
+    <string name="transition_name_add_fab">add_fab</string>
+    <string name="transition_name_edit_note">edit_note</string>
+    <string name="transition_name_create_note">create_note</string>
 </resources>

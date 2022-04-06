@@ -1,5 +1,8 @@
 package com.adityaamolbavadekar.gonotes.features.note.colors
 
+import android.os.Parcel
+import android.os.Parcelable
+
 /**
  * **An Enum for note colors**
  * You can choose any one from
@@ -11,6 +14,4 @@ package com.adityaamolbavadekar.gonotes.features.note.colors
  * @since **April, 2022**
  */
 
-enum class GoNotesColors {
-    Cyan, Blue, Red, Yellow, Grey, Orange;
-}
+enum class GoNotesColors() { Cyan, Blue, Red, Yellow, Grey, Orange; }

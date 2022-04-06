@@ -9,7 +9,6 @@ import androidx.room.TypeConverter
  *  val i = GoNotesColors.Blue.toInt()
  *  val color : GoNotesColors = i.toInt()
  *  ```
- *  @param GoNotesColors.ordinal An integer
  *
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
  * @since **April, 2022**
@@ -26,7 +25,6 @@ fun Int.toGoNotesColors(): GoNotesColors {//goNotesColors: Int
  *  ```
  *  GoNotesColors.Blue.toInt()
  *  ```
- *  @param GoNotesColors A GoNotesColors type color
  *
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
  * @since **April, 2022**

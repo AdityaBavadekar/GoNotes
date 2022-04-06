@@ -3,25 +3,29 @@ package com.adityaamolbavadekar.gonotes.utils
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
-import android.view.ViewGroup
-import androidx.annotation.DrawableRes
+import android.view.View
 import androidx.core.view.isVisible
-import androidx.core.view.size
 import com.adityaamolbavadekar.gonotes.databinding.InfoCardBinding
-import com.google.android.material.appbar.AppBarLayout
-import kotlin.properties.Delegates
 
-class InfoCard {
+class InfoCardView {
 
-    class Builder(private val context: Context, private val appBarLayout: AppBarLayout) :
-        InfoCard(context, appBarLayout) {
+    class Builder(private val context: Context) :
+        InfoCardViewInterface {
+        private val clickListenerDismissBehavior = View.OnClickListener { hideFromParent() }
         override var title: String? = null
-        override var message: String? = ""
-        override var positiveButtonText: String? = InfoCard.TEXT_GOT_IT
-        override var negativeButtonText: String? = InfoCard.TEXT_LEARN_MORE
+        override var message: String? = null
+        override var positiveButtonText: String = InfoCardViewInterface.TEXT_GOT_IT
+        override var negativeButtonText: String? = null
+        override var icon: Int? = null
+        override var positiveButtonListener: View.OnClickListener = clickListenerDismissBehavior
+        override var negativeButtonListener: View.OnClickListener = clickListenerDismissBehavior
+        override var infoButtonListener: View.OnClickListener = clickListenerDismissBehavior
+        override var useInfoIcon: Boolean = false
+        override var image: Int? = null
+        override var infoCardView: InfoCardBinding? = null
 
-        fun build(): InfoCard {
-            createLayout()
+        fun build(): View {
+            createLayout(context)
             if (title != null) {
                 infoCardView!!.textViewTitle.text = title!!
                 infoCardView!!.textViewTitle.isVisible = true
@@ -32,19 +36,9 @@ class InfoCard {
                 infoCardView!!.textViewMessage.isVisible = true
             }
 
-            if (positiveButtonText != null) {
-                infoCardView!!.buttonPositive.text = positiveButtonText!!
-                infoCardView!!.buttonPositive.isVisible = true
-                infoCardView!!.buttonPositive.setOnClickListener { positiveButtonListener }
-            } else {
-                infoCardView!!.buttonPositive.text = TEXT_GOT_IT
-                infoCardView!!.buttonPositive.isVisible = true
-                infoCardView!!.buttonPositive.setOnClickListener {
-                    DialogInterface.OnClickListener { _, _ ->
-                        removeFromParent()
-                    }
-                }
-            }
+            infoCardView!!.buttonPositive.text = positiveButtonText
+            infoCardView!!.buttonPositive.isVisible = true
+            infoCardView!!.buttonPositive.setOnClickListener { positiveButtonListener }
 
             if (negativeButtonText != null) {
                 infoCardView!!.buttonNegative.text = negativeButtonText!!
@@ -65,65 +59,99 @@ class InfoCard {
             }
 
             if (useInfoIcon) {
-                infoCardView!!.buttonNegative.setOnClickListener { CLICK_LISTENER }
                 infoCardView!!.buttonNegative.isVisible = false
                 infoCardView!!.infoIconImageView.setImageResource(image!!)
                 infoCardView!!.infoIconFrame1.isVisible = true
-                infoCardView!!.infoIconFrame1.setOnClickListener { removeFromParent() }
+                infoCardView!!.infoIconFrame1.setOnClickListener { infoButtonListener }
             }
 
-            val params = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-
+/*
             indexInParent = appBarLayout.size - 1
             appBarLayout.addView(infoCardView!!.root, indexInParent, params)
+*/
+            return infoCardView!!.root
+        }
 
+        fun withTitle(title: String): Builder {
+            this.title = title
+            return this
+        }
+
+        fun withMessage(message: String): Builder {
+            this.message = message
+            return this
+        }
+
+        fun withPositiveButton(text: String, clickListener: View.OnClickListener?): Builder {
+            this.positiveButtonText = text
+            if (clickListener != null) {
+                this.positiveButtonListener = clickListener
+            }
+            return this
+        }
+
+        fun withNegativeButton(text: String, clickListener: View.OnClickListener?): Builder {
+            this.negativeButtonText = text
+            if (clickListener != null) {
+                this.negativeButtonListener = clickListener
+            }
+            return this
+        }
+
+        fun withInfoIconButton(clickListener: View.OnClickListener?): Builder {
+            this.useInfoIcon = true
+            if (clickListener != null) {
+                this.infoButtonListener = clickListener
+            }
             return this
         }
     }
 
-    open class InfoCard(private val context: Context, private val appBarLayout: AppBarLayout) {
+    interface InfoCardViewInterface {
         /**
          * Sets title for the Info Card
          *
          * */
-        open var title: String? = null
+        open var title: String?
 
         /**
          * Sets message for the Info Card
          *
          * */
-        open var message: String? = null
+        open var message: String?
 
         /**
          * Sets positive button's text
          *
          * */
-        open var positiveButtonText: String? = null
+        open var positiveButtonText: String
 
         /**
          * Sets negative button's text
          *
          * */
-        open var negativeButtonText: String? = null
+        open var negativeButtonText: String?
 
         /**
          * Sets click listener for positive button
-         * @see InfoCard.positiveButtonText
+         * @see InfoCardViewInterface.positiveButtonText
          *
          * */
-        open var positiveButtonListener: DialogInterface.OnClickListener =
-            CLICK_LISTENER_ACTION_REMOVE_VIEW
+        open var positiveButtonListener: View.OnClickListener
 
         /**
          * Sets click listener for negative button
-         * @see InfoCard.negativeButtonText
+         * @see InfoCardViewInterface.negativeButtonText
          *
          * */
-        open var negativeButtonListener: DialogInterface.OnClickListener =
-            CLICK_LISTENER_ACTION_REMOVE_VIEW
+        open var negativeButtonListener: View.OnClickListener
+
+        /**
+         * Sets click listener for info button
+         * @see InfoCardViewInterface.useInfoIcon
+         *
+         * */
+        open var infoButtonListener: View.OnClickListener
 
         /**
          * Sets InfoIcon for instead of using negative button.
@@ -132,63 +160,57 @@ class InfoCard {
          * @see android.R.drawable.ic_menu_info_details
          *
          * */
-        open var useInfoIcon: Boolean = false
+        open var useInfoIcon: Boolean
 
         /**
          * Sets icon for the Info Card
          *
          * */
-        @DrawableRes
-        open var icon: Int? = null
-
-        var indexInParent by Delegates.notNull<Int>()
+//        @DrawableRes
+        open var icon: Int?
 
         /**
          * Sets drawable for the Info Card
          *
          * */
-        @DrawableRes
-        open var image: Int? = null
-        var infoCardView: InfoCardBinding? = null
-        var isShown: Boolean = false
+//        @DrawableRes
+        open var image: Int?
+        var infoCardView: InfoCardBinding?
 
         companion object {
-            //            POSITIVE
+            /*POSITIVE*/
             const val TEXT_ACCEPT = "Accept"
             const val TEXT_GOT_IT = "Got it"
             const val TEXT_OK = "Ok"
             const val TEXT_OKAY = "Okay"
 
-            //            NEGATIVE
+            /*NEGATIVE*/
             const val TEXT_DENY = "Deny"
             const val TEXT_DECLINE = "Decline"
             const val TEXT_LEARN_MORE = "Learn more"
             const val TEXT_CANCEL = "Cancel"
             const val TEXT_DELETE = "Delete"
             val CLICK_LISTENER = DialogInterface.OnClickListener { _, _ -> }
-            val CLICK_LISTENER_ACTION_REMOVE_VIEW = DialogInterface.OnClickListener { _, _ ->
-
-            }
         }
 
-        fun removeFromParent() {
-            appBarLayout.removeViewAt(indexInParent)
+        fun hideFromParent() {
+            infoCardView!!.root.visibility = View.GONE
         }
 
         /**
-         * Builds the Info Card
-         * @param context
+         * Inflates the Info Card
          *
          * */
-        fun createLayout() {
+        fun createLayout(context: Context) {
             infoCardView =
                 InfoCardBinding.inflate(LayoutInflater.from(context))
         }
-
+/*
+        */
         /**
          * Shows the dialog if it was created or built earlier
          *
-         * */
+         * *//*
         fun show() {
             if (!isShown) {
                 infoCardView!!.root.isVisible = true
@@ -197,18 +219,17 @@ class InfoCard {
             }
         }
 
+        */
         /**
          * Hides the dialog if it was shown earlier
          *
-         * */
+         * *//*
         fun hide() {
             if (isShown) {
                 infoCardView!!.root.isVisible = false
             } else {
                 return
             }
-        }
+        }*/
     }
-
-
 }

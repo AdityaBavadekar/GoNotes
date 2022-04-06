@@ -1,30 +1,31 @@
 
-package com.adityaamolbavadekar.gonotes.features.note.data
+package com.adityaamolbavadekar.gonotes.features.note.datasource
 
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.adityaamolbavadekar.gonotes.utils.NOTE
 
 @Entity(tableName = "notes_table")
 data class NoteModel(
     @PrimaryKey(autoGenerate = true) var id: Int,
-    val title: String,
-    val body: String,
-    val label: String,
+    var title: String,
+    var body: String,
+    var label: String,
     val created: Long,
     val createdGeneralForm: String,
-    val edited: Long,
-    val editedGeneralForm: String,
-    val color: String,
-    val isPinned: Boolean,
-    val isBinned: Boolean,
-    val isArchived: Boolean,
-    val isFavourite: Boolean,
-    val isReminder: Boolean,
-    val isLocked: Boolean,
-    var itemType: Int = NOTE,
-    var itemTitle: String = ""
+    var edited: Long,
+    var editedGeneralForm: String,
+    var color: String,
+    var isPinned: Boolean,
+    var isBinned: Boolean,
+    var isArchived: Boolean,
+    var isFavourite: Boolean,
+    var isReminder: Boolean,
+    var isLocked: Boolean,
+    var itemType: Int,
+    var itemTitle: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

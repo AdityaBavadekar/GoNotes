@@ -12,7 +12,7 @@
     android:focusable="true"
     android:longClickable="true"
     app:cardCornerRadius="25dp"
-    app:cardElevation="@dimen/note_corner_radius">
+    app:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"

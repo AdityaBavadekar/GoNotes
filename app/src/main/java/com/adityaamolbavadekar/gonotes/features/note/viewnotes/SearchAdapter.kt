@@ -1,4 +1,4 @@
-package com.adityaamolbavadekar.gonotes.features.note.view
+package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
 import android.content.SharedPreferences
 import android.view.LayoutInflater
@@ -42,7 +42,7 @@ class SearchAdapter(
             }
             binding.root.setOnClickListener {
                 val action =
-                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadat = note)
+                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadata = note)
                 NavigationUtils.toEditNote(it, action)
             }
         }

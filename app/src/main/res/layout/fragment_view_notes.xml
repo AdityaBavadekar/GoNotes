@@ -4,24 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:id="@+id/coordinator"
+    android:transitionGroup="true"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        app:liftOnScroll="true"
-        app:liftOnScrollTargetViewId="@id/notesRecyclerView"
+        android:layout_height="56dp"
         android:background="?colorPrimary"
-        android:layout_height="56dp">
+        app:liftOnScroll="true"
+        app:liftOnScrollTargetViewId="@id/notesRecyclerView">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:id="@+id/toolbar"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            tools:menu="@menu/menu_view_note"
             app:title="@string/app_name"
-            />
+            tools:menu="@menu/menu_view_note" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,12 +29,13 @@
         android:id="@+id/notesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:scrollbarStyle="insideInset"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        android:background="@android:color/transparent"
         android:layout_marginHorizontal="5dp"
+        android:background="@android:color/transparent"
+        android:layoutAnimation="@anim/layout_recycler_view_item_fall_down"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:spanCount="2"
         tools:listitem="@layout/item_note" />
 
@@ -43,11 +44,10 @@
         android:id="@+id/addNoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:transitionName="@string/transition_name_add_fab"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/default_fab_margin"
         android:padding="20dp" />
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

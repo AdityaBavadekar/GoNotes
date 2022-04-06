@@ -1,6 +1,7 @@
 package com.adityaamolbavadekar.gonotes.features.note.datasource
 
-import androidx.lifecycle.LiveData
+import androidx.annotation.WorkerThread
+import kotlinx.coroutines.flow.Flow
 
 /**
  *
@@ -9,37 +10,36 @@ import androidx.lifecycle.LiveData
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
  * @since **April, 2022** *
  */
-class NoteRepoImpl(private val dao: NoteDao) : NoteRepo {
+@Suppress("RedundantSuspendModifier")
+class NoteRepository(private val dao: NoteDao) {
 
-    override fun getNotes(): LiveData<List<NoteModel>> {
-        return dao.getNotes()
-    }
+    val allNotes: Flow<List<NoteModel>> = dao.getNotes()
+/*
+    val binNotes: Flow<List<NoteModel>> = dao.getBinnedNotes()
+    val normalNotes: Flow<List<NoteModel>> = dao.getNormalNotes()
+    fun getNoteWithId(ID: Int): Flow<NoteModel> = dao.getNoteWithId(ID)
+    fun getNotesCreatedOn(CREATED_ON: String): Flow<List<NoteModel>> = dao.getNotesCreatedOn(CREATED_ON)
+    suspend fun getNotesForLabel(LABEL: String): Flow<List<NoteModel>> = dao.getNotesForLabel(LABEL)
+*/
 
-    override fun getNoteWithId(ID: String): LiveData<NoteModel> {
-        return dao.getNoteWithId(ID)
-    }
-
-    override fun getNotesCreatedOn(CREATED_ON: String): LiveData<List<NoteModel>> {
-        return dao.getNotesCreatedOn(CREATED_ON)
-    }
-
-    override suspend fun getNotesForLabel(LABEL: String): LiveData<List<NoteModel>> {
-        return dao.getNotesForLabel(LABEL)
-    }
-
-    override suspend fun insert(NOTE: NoteModel) {
+    @WorkerThread
+    suspend fun insert(NOTE: NoteModel) {
         dao.insert(NOTE)
     }
 
-    override suspend fun update(NOTE: NoteModel) {
+    @WorkerThread
+    suspend fun update(NOTE: NoteModel) {
         dao.update(NOTE)
     }
-
-    override suspend fun deleteNoteWithId(ID: String) {
-        dao.deleteNoteWithId(ID)
+/*
+    @WorkerThread
+    suspend fun deleteNoteWithId(noteModel: NoteModel) {
+        dao.deleteNote(noteModel)
     }
 
-    override suspend fun deleteAll() {
+    */
+    @WorkerThread
+    suspend fun deleteAll() {
         dao.deleteAll()
     }
 
