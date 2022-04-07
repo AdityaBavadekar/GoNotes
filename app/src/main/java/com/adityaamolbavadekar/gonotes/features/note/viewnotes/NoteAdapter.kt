@@ -46,7 +46,7 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
             binding.title.text = note.title
             binding.body.text = note.body
             binding.timestamp.text =
-                SimpleDateFormat("dd MMM H:mm", Locale.ENGLISH).format(Date(note.created))
+                SimpleDateFormat("dd MMM h:mm", Locale.ENGLISH).format(Date(note.created))
 /*
             if (note.label.isNotEmpty()) {
                 binding.label.text = note.label
@@ -58,7 +58,7 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
             ViewCompat.setTransitionName(binding.root, note.id.toString())
             binding.root.setOnClickListener {
                 val action =
-                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadata = note)
+                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteReferenceId = note.id)
                 Navigation.findNavController(it).navigate(action)
             }
         }

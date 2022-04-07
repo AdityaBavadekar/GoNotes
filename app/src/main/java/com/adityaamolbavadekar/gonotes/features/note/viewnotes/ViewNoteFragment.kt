@@ -17,7 +17,9 @@ import com.adityaamolbavadekar.gonotes.base.BaseFragment
 import com.adityaamolbavadekar.gonotes.databinding.FragmentViewNotesBinding
 import com.adityaamolbavadekar.gonotes.databinding.InfoCardBinding
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
+import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
 import com.google.android.material.snackbar.Snackbar
+import org.acra.log.debug
 
 /**
  * A Fragment class which shows a list of all notes available in the database.
@@ -32,9 +34,7 @@ class ViewNoteFragment : BaseFragment() {
 
     private lateinit var binding: FragmentViewNotesBinding
     private lateinit var layoutManager: StaggeredGridLayoutManager
-    private lateinit var searchLayoutManager: LinearLayoutManager
     private lateinit var adapter: NoteAdapter
-    private lateinit var searchAdapter: SearchAdapter
     private lateinit var recyclerView: RecyclerView
     private var notesList: MutableList<NoteModel> = mutableListOf()
     private var searchItems: MutableList<NoteModel> = mutableListOf()
@@ -43,8 +43,6 @@ class ViewNoteFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         adapter = NoteAdapter(mContext!!, notesList)
         layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        searchAdapter = SearchAdapter(mContext!!, searchItems)
-        searchLayoutManager = LinearLayoutManager(mContext!!)
         initNotesList()
     }
 
@@ -53,13 +51,9 @@ class ViewNoteFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentViewNotesBinding.inflate(layoutInflater)
-        initTransition()
-        initRecyclerView()
-        initFab()
+        binding = FragmentViewNotesBinding.inflate(layoutInflater)
         return binding.root
     }
-
 
     private fun initFab() {
         /*
@@ -106,6 +100,7 @@ class ViewNoteFragment : BaseFragment() {
     }
 
     private fun initNotesList() {
+        viewModel.generateNotes()
         viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
             if (!notes.isNullOrEmpty()) {
                 val filtererNotes = mutableListOf<NoteModel>()
@@ -125,6 +120,9 @@ class ViewNoteFragment : BaseFragment() {
         /*view.doOnPreDraw {
             startPostponedEnterTransition()
         }*/
+        initTransition()
+        initRecyclerView()
+        initFab()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -135,62 +133,7 @@ class ViewNoteFragment : BaseFragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val menuItem = menu.findItem(R.id.action_search_view_notes)
-        val searchView = menuItem.actionView as SearchView
-        searchView.setOnCloseListener {
-            searchItems = mutableListOf()
-            initRecyclerView()
-            true
-        }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                searchNotes(newText, searchView)
-                return true
-            }
-
-            override fun onQueryTextSubmit(query: String?): Boolean = true
-        })
-    }
-
-    /**
-     * This `searchNotes(text: String?)` function searches
-     * the database for notes which contain words similar to
-     * to the user input.
-     *
-     * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
-     * @since **April, 2022**
-     */
-    private fun searchNotes(text: String?, searchView: SearchView) { //TODO
-        if (text == null) {
-            searchItems = mutableListOf()
-            initRecyclerView()
-            return
-        }
-        searchItems = notesList//.filterFor(text)
-        if (searchItems.isEmpty()) {
-            val snack = Snackbar.make(searchView, "Not notes found", Snackbar.LENGTH_INDEFINITE)
-            snack.setAction(
-                "GOT BACK"
-            ) {
-                snack.dismiss()
-                initRecyclerView()
-            }
-        } else {
-            changeRecyclerViewConfig()
-        }
-
-    }
-
-    private fun changeRecyclerViewConfig() {
-        recyclerView.adapter = this.searchAdapter
-        recyclerView.layoutManager = this.searchLayoutManager
-    }
-
-
-    override fun onDebug() {
-        if (pref.getBoolean("GENERATE_LISTS", true)
-        ) {
-            viewModel.generateNotes()
-        }
+        menuItem.setOnMenuItemClickListener { TODO() }
     }
 
     override fun onWelcomeNeeded() {

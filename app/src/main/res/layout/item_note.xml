@@ -12,19 +12,19 @@
     android:focusable="true"
     android:longClickable="true"
     app:cardCornerRadius="25dp"
-    app:cardElevation="0dp">
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="5dp">
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/note_items_margin_start"
             android:layout_marginTop="@dimen/note_margin"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
@@ -36,7 +36,7 @@
             android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/note_items_margin_start"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ellipsize="end"
@@ -48,7 +48,7 @@
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/note_items_margin_start"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/label_text_background"
@@ -63,8 +63,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="36dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="14dp"
+            android:layout_marginStart="@dimen/note_items_margin_start"
             android:layout_marginBottom="@dimen/note_margin">
 
             <TextView
@@ -73,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
+                android:paddingHorizontal="2dp"
                 android:textAppearance="@style/TextAppearance.MyTheme.Body3"
                 tools:text="@tools:sample/date/ddmmyy" />
 
@@ -80,14 +80,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true">
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical|end">
 
                 <ImageView
                     android:id="@+id/lockedIcon"
                     android:layout_width="@dimen/note_icon_size"
                     android:layout_height="@dimen/note_icon_size"
                     android:layout_marginEnd="5dp"
-                    android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/note_icon_padding"
                     android:src="@drawable/ic_locked"
                     android:visibility="gone" />
@@ -97,7 +97,6 @@
                     android:layout_width="@dimen/note_icon_size"
                     android:layout_height="@dimen/note_icon_size"
                     android:layout_marginEnd="5dp"
-                    android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/note_icon_padding"
                     android:src="@drawable/ic_bookmark"
                     android:visibility="gone"
@@ -108,7 +107,6 @@
                     android:layout_width="@dimen/note_icon_size"
                     android:layout_height="@dimen/note_icon_size"
                     android:layout_marginEnd="5dp"
-                    android:background="?attr/selectableItemBackground"
                     android:padding="@dimen/note_icon_padding"
                     android:src="@drawable/ic_favorite"
                     android:visibility="gone"

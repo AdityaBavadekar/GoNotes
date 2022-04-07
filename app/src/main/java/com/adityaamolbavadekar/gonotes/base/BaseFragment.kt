@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import androidx.viewbinding.BuildConfig
 import com.adityaamolbavadekar.gonotes.GoNotes
 import com.adityaamolbavadekar.gonotes.features.note.viewnotes.NoteViewModelFactory
 import com.adityaamolbavadekar.gonotes.features.note.viewnotes.NotesViewModel
+import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
 import kotlin.properties.Delegates
 
 abstract class BaseFragment : Fragment() {
@@ -29,10 +31,10 @@ abstract class BaseFragment : Fragment() {
         NoteViewModelFactory((requireActivity().application as GoNotes).repository)
     }
     var mContext: FragmentActivity? = null
-    lateinit var fragmentTAG: String
-    lateinit var fragmentDesc: String
     lateinit var pref: SharedPreferences
     private var welcomeNeeded by Delegates.notNull<Boolean>()
+    lateinit var fragmentTAG: String
+    lateinit var fragmentDesc: String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,24 +43,28 @@ abstract class BaseFragment : Fragment() {
         welcomeNeeded = pref.getBoolean("USER_WELCOMED",false)
         fragmentTAG = setTag()
         fragmentDesc = setDescription()
-//        mContext!!.onAttachCalled(fragmentTAG, fragmentDesc)
+        debugLog("onAttach called [description=${fragmentDesc}]")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        debugLog("[${fragmentTAG}] : onCreate called")
         setHasOptionsMenu(setHasMenu())
-        if (BuildConfig.DEBUG) onDebug()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        debugLog("[${fragmentTAG}] : onStart called")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (welcomeNeeded) onWelcomeNeeded()
+        debugLog("[${fragmentTAG}] : onViewCreated called")
+        if (welcomeNeeded) {
+            debugLog("Welcome is needed")
+            onWelcomeNeeded()
+        }
     }
-
-    /**
-     * Called only if installed app is in its [BuildConfig.DEBUG] build.
-     */
-    abstract fun onDebug()
 
     /**
      * Called inside [onViewCreated].

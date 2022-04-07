@@ -108,4 +108,6 @@
     <string name="transition_name_create_note">create_note</string>
     <string name="infocard_button_text_got_it">Got it</string>
     <string name="infocard_button_text_learn_more">Learn more</string>
+    <string name="search_suggestion_hint">Search notes</string>
+    <string name="edit_note_edit_text_loading_status">Loading...</string>
 </resources>

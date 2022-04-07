@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 interface NoteRepo {
     val allNotes: Flow<List<NoteModel>>
 
+    fun getNote(ID: Int): Flow<NoteModel>
+
     @WorkerThread
     suspend fun insert(NOTE: NoteModel)
 

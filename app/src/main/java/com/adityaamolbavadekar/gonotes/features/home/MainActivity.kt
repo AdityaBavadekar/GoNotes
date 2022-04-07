@@ -17,7 +17,6 @@ class MainActivity : BaseActivity() {
         setupNavigation(true, binding.fragmentHolder.id)
     }
 
-    override fun onDebug() {}
     override fun setTag(): String = "MainActivity"
     override fun setDescription(): String = "A Activity class that is Home."
 }

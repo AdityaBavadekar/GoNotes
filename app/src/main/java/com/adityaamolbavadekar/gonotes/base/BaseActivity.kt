@@ -2,9 +2,7 @@ package com.adityaamolbavadekar.gonotes.base
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -13,14 +11,14 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.viewbinding.BuildConfig
-import com.adityaamolbavadekar.gonotes.GoNotes
+import androidx.preference.PreferenceManager
+import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
 
 abstract class BaseActivity : AppCompatActivity() {
 
     var mContext: Context? = null
     private var TAG: String = "BaseActivity"
-    private lateinit var fragmentDesc: String
+    private lateinit var activityDesc: String
     lateinit var pref: SharedPreferences
     lateinit var navController: NavController
     lateinit var navHostFragment: NavHostFragment
@@ -29,41 +27,39 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = this
+        pref = PreferenceManager.getDefaultSharedPreferences(this)
         TAG = setTag()
-        fragmentDesc = setDescription()
-        Log.d(TAG, "onStart Called")
-        if (BuildConfig.DEBUG) onDebug()
+        activityDesc = setDescription()
+        debugLog("onCreate called [description=${activityDesc}]")
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "onStart Called")
+        debugLog("onStart Called")
     }
     override fun onRestart() {
         super.onRestart()
-        Log.d(TAG, "onRestart Called")
+        debugLog("onRestart Called")
     }
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "onPause Called")
+        debugLog("onPause Called")
     }
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "onResume Called")
+        debugLog("onResume Called")
     }
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(TAG, "onDestroy Called")
+        debugLog("onDestroy Called")
     }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        Log.d(TAG, "onDetachedFromWindow Called for context : ${window.context}")
+        debugLog("onDetachedFromWindow Called for context : ${window.context}")
     }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        Log.d(TAG, "onDetachedFromWindow Called")
+        debugLog( "onDetachedFromWindow Called")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -71,11 +67,6 @@ abstract class BaseActivity : AppCompatActivity() {
             navController.navigateUp() || super.onSupportNavigateUp()
         } else super.onSupportNavigateUp()
     }
-
-    /**
-     * Called only if installed app is in its [BuildConfig.DEBUG] build.
-     */
-    abstract fun onDebug()
 
     /**
      * Called to set Logging TAG.

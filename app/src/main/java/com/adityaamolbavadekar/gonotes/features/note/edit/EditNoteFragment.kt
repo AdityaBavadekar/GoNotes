@@ -1,57 +1,59 @@
 package com.adityaamolbavadekar.gonotes.features.note.edit
 
-import android.graphics.Color
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.transition.Slide
-import com.adityaamolbavadekar.gonotes.R
 import com.adityaamolbavadekar.gonotes.base.BaseFragment
 import com.adityaamolbavadekar.gonotes.databinding.FragmentEditNoteBinding
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
+import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
 import com.adityaamolbavadekar.gonotes.usecases.create.NoteUtils
-import com.google.android.material.transition.MaterialContainerTransform
 
 class EditNoteFragment : BaseFragment() {
 
     private lateinit var binding: FragmentEditNoteBinding
-    private lateinit var noteModel: NoteModel
+    private var noteModel: NoteModel = NoteUtils.Creator().build()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentEditNoteBinding.inflate(layoutInflater)
-        noteModel = EditNoteFragmentArgs.fromBundle(arguments!!).noteMetadata
-        binding.noteTitleEditText.setText(noteModel.title)
-        binding.noteBodyEditText.setText(noteModel.body)
+        binding = FragmentEditNoteBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        enterTransition = MaterialContainerTransform().apply {
-            startViewId = R.id.addNoteButton
-            endViewId = R.id.coordinator
-            drawingViewId = R.id.fragmentHolder
-            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
-            scrimColor = Color.TRANSPARENT
+        val noteId: Int = EditNoteFragmentArgs.fromBundle(arguments!!).noteReferenceId
+        viewModel.requestNote(noteId)
+        viewModel.noteWithId.observe(viewLifecycleOwner) { noteItem ->
+            noteModel = noteItem
+            binding.noteTitleEditText.setText(noteItem.title)
+            binding.noteBodyEditText.setText(noteItem.title)
         }
-
-        returnTransition = Slide().apply {
-            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
-            addTarget(R.id.coordinator)
+        viewModel.title.observe(viewLifecycleOwner) {
+            binding.noteTitleEditText.setText(it)
         }
-
+        viewModel.body.observe(viewLifecycleOwner) {
+            binding.noteBodyEditText.setText(it)
+        }
     }
 
     @Suppress("UselessCallOnNotNull")
     override fun onPause() {
         super.onPause()
+        /*Hide keyboard when fragment is navigating*/
+        val imm = mContext!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        try {
+            imm.hideSoftInputFromWindow(view?.windowToken,0)
+        } catch (e: Exception) {
+            debugLog("Failed to hide the Keyboard")
+        }
         val titleText = binding.noteTitleEditText.text.toString()
         val bodyText = binding.noteBodyEditText.text.toString()
 
@@ -71,10 +73,9 @@ class EditNoteFragment : BaseFragment() {
     }
 
     override fun onWelcomeNeeded() {
-
     }
+
     override fun setHasMenu(): Boolean = false/*Edit later TODO*/
-    override fun onDebug() {}
     override fun setTag(): String = "EditNoteFragment"
     override fun setDescription(): String =
         "A Fragment class which helps user edit an existing note and auto save it to the database."

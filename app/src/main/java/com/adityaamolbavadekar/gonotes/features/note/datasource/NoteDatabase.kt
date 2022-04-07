@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
 import com.adityaamolbavadekar.gonotes.usecases.create.NoteUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -21,14 +22,15 @@ abstract class NoteDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
-        fun getDatabase(context: Context, scope: CoroutineScope): NoteDatabase {
+        fun getDatabase(context: Context, scope: CoroutineScope,databaseName:String="notes_database"): NoteDatabase {
             return INSTANCE
                 ?: synchronized(this) {
                     val instance = Room.databaseBuilder(
-                        context, NoteDatabase::class.java, "notes_database"
+                        context, NoteDatabase::class.java, databaseName
                     )
                         .addCallback(NoteDatabaseCallback(scope))
                         .build()
+                    context.debugLog("Database [name=${databaseName}] created")
                     INSTANCE = instance
                     instance
                 }

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
         app:liftOnScroll="true"
+        android:alpha="0.9"
         app:liftOnScrollTargetViewId="@id/mainFrameLayout">
 
         <androidx.appcompat.widget.Toolbar
@@ -19,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
             tools:menu="@menu/menu_view_note"
             tools:title="@string/app_name" />
 
@@ -26,8 +28,8 @@
             android:id="@+id/mainInfoCardRootCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:background="?colorSurface">
+            android:background="?colorSurface"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,6 +111,7 @@
                         android:layout_gravity="start"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="5dp"
+                        android:text="@string/infocard_button_text_learn_more"
                         android:textAllCaps="false"
                         android:textAppearance="@style/TextAppearance.MyTheme.ButtonSmall"
                         android:visibility="gone"
@@ -116,7 +119,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_marginStart="50dp"
-                        android:text="@string/infocard_button_text_learn_more"
                         tools:visibility="visible" />
 
                     <FrameLayout
@@ -156,13 +158,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:padding="5dp"
+                        android:text="@string/infocard_button_text_got_it"
                         android:textAllCaps="false"
                         android:textAppearance="@style/TextAppearance.MyTheme.ButtonSmall"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:text="@string/infocard_button_text_got_it"
                         tools:visibility="visible" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -197,6 +199,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/default_fab_margin"
         android:padding="20dp"
-        android:src="@drawable/add" />
+        android:src="@drawable/add"
+        android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

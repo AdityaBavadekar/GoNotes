@@ -13,6 +13,8 @@ class NoteRepository(private val dao: NoteDao) : NoteRepo {
 
     override val allNotes: Flow<List<NoteModel>> = dao.getNotes()
 
+    override fun getNote(ID: Int): Flow<NoteModel> = dao.getNote(ID)
+
     override suspend fun insert(NOTE: NoteModel) = dao.insert(NOTE)
 
     override suspend fun update(NOTE: NoteModel) = dao.update(NOTE)

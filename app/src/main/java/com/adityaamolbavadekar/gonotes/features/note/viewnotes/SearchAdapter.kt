@@ -1,27 +1,26 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.adityaamolbavadekar.gonotes.GoNotes
 import com.adityaamolbavadekar.gonotes.databinding.ItemSearchBinding
-import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
+import com.adityaamolbavadekar.gonotes.features.search.source.SearchItemModel
 
-class SearchAdapter(
-    private val context: FragmentActivity,
-    private val searchItems: MutableList<NoteModel>
-) :
+class SearchAdapter() :
     RecyclerView.Adapter<SearchAdapter.ItemHolder>() {
+
+    private var searchItems  : MutableList<SearchItemModel> = mutableListOf()
 
     class ItemHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root)
 
     private lateinit var prefs: SharedPreferences
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return ItemHolder(
             ItemSearchBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -32,13 +31,13 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        val note = searchItems[position]
+        val suggestion = searchItems[position]
         holder.apply {
-            binding.searchTitle.text = note.title
-            binding.searchSubtitle.text = note.body
+            binding.searchTitle.text = suggestion.title
+            binding.searchSubtitle.text = suggestion.body
             binding.root.setOnClickListener {
                 val action =
-                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteMetadata = note)
+                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteReferenceId = suggestion.suggestedNoteReferenceId)
                 Navigation.findNavController(it).navigate(action)
             }
         }
@@ -47,4 +46,10 @@ class SearchAdapter(
     override fun getItemCount(): Int {
         return searchItems.size
     }
+
+
+    fun submitList(newSearchItems : MutableList<SearchItemModel>){
+        searchItems = newSearchItems
+    }
+
 }
