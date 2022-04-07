@@ -9,7 +9,7 @@ interface NoteDao {
     @Query("SELECT * FROM notes_table ORDER BY CREATED DESC")
     fun getNotes(): Flow<List<NoteModel>>
 
-    @Query("SELECT * FROM notes_table ORDER BY CREATED DESC")
+    @Query("SELECT * FROM notes_table WHERE id =:ID")
     fun getNote(ID : Int): Flow<NoteModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

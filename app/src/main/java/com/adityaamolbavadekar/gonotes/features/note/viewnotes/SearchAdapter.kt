@@ -1,20 +1,18 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
-import android.app.Activity
 import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
-import com.adityaamolbavadekar.gonotes.GoNotes
 import com.adityaamolbavadekar.gonotes.databinding.ItemSearchBinding
+import com.adityaamolbavadekar.gonotes.features.sampledata.Samples
 import com.adityaamolbavadekar.gonotes.features.search.source.SearchItemModel
+import com.google.android.material.snackbar.Snackbar
 
-class SearchAdapter() :
+class SearchAdapter(private var searchItems: MutableList<SearchItemModel> = Samples.searchItems) :
     RecyclerView.Adapter<SearchAdapter.ItemHolder>() {
 
-    private var searchItems  : MutableList<SearchItemModel> = mutableListOf()
+//    private var searchItems  : MutableList<SearchItemModel> = mutableListOf()
 
     class ItemHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -31,14 +29,15 @@ class SearchAdapter() :
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        val suggestion = searchItems[position]
         holder.apply {
+            val suggestion = searchItems[position]
             binding.searchTitle.text = suggestion.title
             binding.searchSubtitle.text = suggestion.body
             binding.root.setOnClickListener {
-                val action =
-                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteReferenceId = suggestion.suggestedNoteReferenceId)
-                Navigation.findNavController(it).navigate(action)
+                Snackbar.make(it, "Suggestion number $position", Snackbar.LENGTH_SHORT).show()
+                /* val action =
+                     ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteReferenceId = suggestion.suggestedNoteReferenceId)
+                 Navigation.findNavController(it).navigate(action)*/
             }
         }
     }
@@ -48,7 +47,7 @@ class SearchAdapter() :
     }
 
 
-    fun submitList(newSearchItems : MutableList<SearchItemModel>){
+    fun submitList(newSearchItems: MutableList<SearchItemModel>) {
         searchItems = newSearchItems
     }
 

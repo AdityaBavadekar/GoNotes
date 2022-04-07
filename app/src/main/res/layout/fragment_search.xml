@@ -7,7 +7,7 @@
     android:background="?attr/colorSurface"
     android:orientation="vertical"
     android:transitionGroup="true"
-    app:paddingTopSystemWindowInsets="@{true}">
+    app:paddingTopSystemWindowInsets="true">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/searchToolbar"

@@ -1,12 +1,13 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
+import androidx.core.view.MenuItemCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +16,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.adityaamolbavadekar.gonotes.R
 import com.adityaamolbavadekar.gonotes.base.BaseFragment
 import com.adityaamolbavadekar.gonotes.databinding.FragmentViewNotesBinding
-import com.adityaamolbavadekar.gonotes.databinding.InfoCardBinding
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
-import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
-import com.google.android.material.snackbar.Snackbar
-import org.acra.log.debug
+import com.adityaamolbavadekar.gonotes.features.settings.SettingsActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.acra.ACRA
 
 /**
  * A Fragment class which shows a list of all notes available in the database.
@@ -33,9 +33,10 @@ import org.acra.log.debug
 class ViewNoteFragment : BaseFragment() {
 
     private lateinit var binding: FragmentViewNotesBinding
-    private lateinit var layoutManager: StaggeredGridLayoutManager
+    private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: NoteAdapter
     private lateinit var recyclerView: RecyclerView
+    private var isUsingLinearLayout:Boolean = true
     private var notesList: MutableList<NoteModel> = mutableListOf()
     private var searchItems: MutableList<NoteModel> = mutableListOf()
 
@@ -43,7 +44,6 @@ class ViewNoteFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         adapter = NoteAdapter(mContext!!, notesList)
         layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        initNotesList()
     }
 
     override fun onCreateView(
@@ -121,6 +121,7 @@ class ViewNoteFragment : BaseFragment() {
             startPostponedEnterTransition()
         }*/
         initTransition()
+        initNotesList()
         initRecyclerView()
         initFab()
     }
@@ -133,7 +134,39 @@ class ViewNoteFragment : BaseFragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
         val menuItem = menu.findItem(R.id.action_search_view_notes)
-        menuItem.setOnMenuItemClickListener { TODO() }
+        menuItem.setOnMenuItemClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_viewNoteFragment_to_searchFragment)
+            true
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+
+            R.id.action_settings_view_notes -> {
+                Intent(mContext!!,SettingsActivity::class.java).also {
+                    startActivity(it)
+                }
+                true
+            }
+            R.id.action_arrangement_view_notes -> {
+                if (isUsingLinearLayout){
+                    layoutManager = LinearLayoutManager(mContext!!)
+                    item.title = "Use Grid layout"
+                }else{
+                    layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    item.title = "Use Linear layout"
+                }
+                true
+            }
+
+            R.id.action_send_feedback_view_notes -> {
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onWelcomeNeeded() {

@@ -31,6 +31,7 @@ class SearchFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = requireActivity()
+        mContext!!.actionBar?.hide()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

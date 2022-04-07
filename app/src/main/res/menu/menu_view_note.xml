@@ -5,12 +5,11 @@
     <item android:title="Search"
         android:orderInCategory="96"
         android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom|collapseActionView"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom"
         android:id="@+id/action_search_view_notes"
         />
 
-    <item android:title="Change Arrangement"
+    <item android:title="Use Grid layout"
         android:orderInCategory="97"
         android:id="@+id/action_arrangement_view_notes"
         />
