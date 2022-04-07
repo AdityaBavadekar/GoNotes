@@ -10,9 +10,9 @@
         android:id="@+id/mainAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:alpha="0.9"
         android:background="?colorPrimary"
         app:liftOnScroll="true"
-        android:alpha="0.9"
         app:liftOnScrollTargetViewId="@id/mainFrameLayout">
 
         <androidx.appcompat.widget.Toolbar
@@ -182,6 +182,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+<!--
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentNavigator"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:navGraph="@navigation/main_navigation" />-->
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentHolder"
@@ -190,6 +197,7 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:navGraph="@navigation/main_navigation" />
+
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -199,7 +207,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/default_fab_margin"
         android:padding="20dp"
-        android:src="@drawable/add"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:src="@drawable/add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

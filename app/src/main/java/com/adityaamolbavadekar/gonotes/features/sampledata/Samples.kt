@@ -7,7 +7,7 @@ import java.util.*
 object Samples {
 
 
-    val searchItems: MutableList<SearchItemModel> = createSearchItems(15)
+    val searchItems: MutableList<SearchItemModel> = createSearchItems(35)
 
     private fun createSearchItems(count:Int): MutableList<SearchItemModel> {
         val items: MutableList<SearchItemModel> = mutableListOf()

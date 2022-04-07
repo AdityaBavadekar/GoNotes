@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.annotation.IdRes
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -37,29 +39,35 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onStart()
         debugLog("onStart Called")
     }
+
     override fun onRestart() {
         super.onRestart()
         debugLog("onRestart Called")
     }
+
     override fun onPause() {
         super.onPause()
         debugLog("onPause Called")
     }
+
     override fun onResume() {
         super.onResume()
         debugLog("onResume Called")
     }
+
     override fun onDestroy() {
         super.onDestroy()
         debugLog("onDestroy Called")
     }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         debugLog("onDetachedFromWindow Called for context : ${window.context}")
     }
+
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        debugLog( "onDetachedFromWindow Called")
+        debugLog("onDetachedFromWindow Called")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -88,8 +96,8 @@ abstract class BaseActivity : AppCompatActivity() {
      * @see [NavigationUI.setupActionBarWithNavController]
      *
      * */
-    fun setupNavigation(setup: Boolean = false, @IdRes fragmentContainer: Int? = null) {
-        if (!setup || fragmentContainer == null) {
+    fun setupNavigation(setup: Boolean = false, @IdRes fragmentContainer: Int? = null, supportActionBar : ActionBar? = null) {
+        if (!setup || fragmentContainer == null || supportActionBar == null) {
             navigationUiEnabled = false
             return
         }
@@ -100,7 +108,7 @@ abstract class BaseActivity : AppCompatActivity() {
         navigationUiEnabled = true
     }
 
-    private var isFullScreen : Boolean = false
+    private var isFullScreen: Boolean = false
 
     /**
      * Configures app to change to fullScreen mode.
@@ -113,12 +121,11 @@ abstract class BaseActivity : AppCompatActivity() {
             windowInsetsController.systemBarsBehavior =
                 WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
             windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
-        }else{
+        } else {
             isFullScreen = false
             windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
         }
     }
-
 
 
 }

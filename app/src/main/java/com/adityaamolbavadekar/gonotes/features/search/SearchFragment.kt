@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adityaamolbavadekar.gonotes.GoNotes
 import com.adityaamolbavadekar.gonotes.R
 import com.adityaamolbavadekar.gonotes.databinding.FragmentSearchBinding
+import com.adityaamolbavadekar.gonotes.features.home.MainActivity
 import com.adityaamolbavadekar.gonotes.features.note.viewnotes.NotesViewModel
 import com.adityaamolbavadekar.gonotes.features.note.viewnotes.SearchAdapter
 import com.google.android.material.transition.MaterialSharedAxis
@@ -31,7 +32,7 @@ class SearchFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = requireActivity()
-        mContext!!.actionBar?.hide()
+        (mContext!! as MainActivity).supportActionBar?.hide()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,7 +13,9 @@
         android:theme="@style/Theme.GoNotes.App">
         <activity
             android:name=".features.settings.SettingsActivity"
-            android:label="@string/title_activity_settings">
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.GoNotes.App"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.APPLICATION_PREFERENCES"/>
                 <category android:name="android.intent.category.DEFAULT"/>
