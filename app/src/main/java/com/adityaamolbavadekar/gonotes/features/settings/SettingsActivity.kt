@@ -6,10 +6,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.adityaamolbavadekar.gonotes.R
 
-
 /**
  * A Settings Class which is a Preferences Activity,
- * this activity handles backstack and other things when a
+ * this activity handles back-stack and other things when a
  * [Preference] in clicked.
  *
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
@@ -37,7 +36,7 @@ class SettingsActivity : AppCompatActivity(),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    companion object{
+    companion object {
         const val TITLE_TAG = "settingsActivityTitle"
     }
 

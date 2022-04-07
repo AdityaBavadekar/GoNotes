@@ -100,10 +100,26 @@
         <item name="android:textSize">13sp</item>
     </style>
 
+
+    <style name="TextAppearance.MyTheme.BodyHeader" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/kumbh_sans_bold</item>
+        <item name="fontFamily">@font/kumbh_sans_bold</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="TextAppearance.MyTheme.Button" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:fontFamily">@font/kumbh_sans_semi_bold</item>
         <item name="fontFamily">@font/kumbh_sans_semi_bold</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.MyTheme.ButtonSmall" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:fontFamily">@font/kumbh_sans_semi_bold</item>
+        <item name="fontFamily">@font/kumbh_sans_semi_bold</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
     <style name="TextAppearance.MyTheme.Caption" parent="TextAppearance.MaterialComponents.Caption">

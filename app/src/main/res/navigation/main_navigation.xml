@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/viewNoteFragment"
-        android:name="com.adityaamolbavadekar.gonotes.features.note.view.ViewNoteFragment"
+        android:name="com.adityaamolbavadekar.gonotes.features.note.viewnotes.ViewNoteFragment"
         android:label="Go Notes"
         tools:layout="@layout/fragment_view_notes">
         <action
@@ -17,19 +17,25 @@
             android:id="@+id/action_viewNoteFragment_to_createNoteFragment"
             app:destination="@id/createNoteFragment" />
         <action
+            android:id="@+id/action_viewNoteFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <!--<action
             android:id="@+id/action_viewNoteFragment_to_binFragment"
-            app:destination="@id/binFragment" />
+            app:destination="@id/binFragment" />-->
     </fragment>
     <fragment
         android:id="@+id/editNoteFragment"
         android:name="com.adityaamolbavadekar.gonotes.features.note.edit.EditNoteFragment"
         android:label="Edit Note"
-        tools:layout="@layout/fragment_edit_note" >
+        tools:layout="@layout/fragment_edit_note">
+       <!-- <argument
+            android:name="noteMetadata"
+            app:argType="com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel"
+            />-->
         <argument
-            android:name="noteMetadat"
-            app:argType="com.adityaamolbavadekar.gonotes.features.note.data.NoteModel"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            android:name="noteReferenceId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/createNoteFragment"
@@ -37,8 +43,29 @@
         android:label="Create Note"
         tools:layout="@layout/fragment_create_note" />
     <fragment
-        android:id="@+id/binFragment"
-        android:name="com.adityaamolbavadekar.gonotes.features.bin.BinFragment"
-        android:label="Notes Bin"
-        tools:layout="@layout/fragment_bin" />
+        android:id="@+id/searchFragment"
+        tools:layout="@layout/fragment_search"
+        android:name="com.adityaamolbavadekar.gonotes.features.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_editNoteFragment"
+            app:destination="@id/editNoteFragment" />
+    </fragment>
+
+    <!--    <fragment
+            android:id="@+id/binFragment"
+            android:name="com.adityaamolbavadekar.gonotes.features.bin.BinFragment"
+            android:label="Notes Bin"
+            tools:layout="@layout/fragment_bin" />-->
+<!--    <fragment
+        android:id="@+id/launcherFragment"
+        android:label=""
+        android:name="com.adityaamolbavadekar.gonotes.features.launcher.LauncherFragment"
+        tools:layout="@layout/fragment_launcher">
+        <action
+            android:id="@+id/action_launcherFragment_to_viewNoteFragment"
+            app:destination="@id/viewNoteFragment"
+            app:popUpTo="@id/viewNoteFragment"
+            app:popUpToInclusive="true" />
+    </fragment>-->
 </navigation>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/coordinator"
     android:paddingTop="10dp">
 
     <ScrollView
@@ -30,6 +31,7 @@
                 android:hint="@string/note_title_text"
                 android:inputType="textMultiLine"
                 android:maxLines="15"
+                android:text="@string/edit_note_edit_text_loading_status"
                 android:padding="20dp"
                 android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
                 tools:text="@tools:sample/full_names" />
@@ -41,6 +43,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/edit_note_edit_text_background"
                 android:gravity="start"
+                android:text="@string/edit_note_edit_text_loading_status"
                 android:hint="@string/note_body_text"
                 android:inputType="textMultiLine"
                 android:padding="20dp"

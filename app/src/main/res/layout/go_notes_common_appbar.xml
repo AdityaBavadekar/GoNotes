@@ -9,12 +9,14 @@
         android:layout_width="match_parent"
         app:liftOnScroll="true"
         app:layout_anchorGravity="top"
+        android:id="@+id/appBar"
         android:background="?colorPrimary"
-        android:layout_height="56dp">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:id="@+id/toolbar"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             tools:menu="@menu/menu_view_note"
             tools:title="@string/app_name"
