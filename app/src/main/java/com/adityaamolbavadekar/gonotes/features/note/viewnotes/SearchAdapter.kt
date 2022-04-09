@@ -9,9 +9,13 @@ import com.adityaamolbavadekar.gonotes.features.sampledata.Samples
 import com.adityaamolbavadekar.gonotes.features.search.source.SearchItemModel
 import com.google.android.material.snackbar.Snackbar
 
-class SearchAdapter(private var searchItems: MutableList<SearchItemModel> = Samples.searchItems) :
+class SearchAdapter(private val searchSuggestionListener: SearchSuggestionListener,var searchItems: MutableList<SearchItemModel> = Samples.searchItems) :
     RecyclerView.Adapter<SearchAdapter.ItemHolder>() {
 
+    interface SearchSuggestionListener {
+        fun onSuggestionClicked(binding: ItemSearchBinding,suggestion : SearchItemModel)
+        fun onSuggestionLongClicked(suggestion : SearchItemModel) : Boolean
+    }
 //    private var searchItems  : MutableList<SearchItemModel> = mutableListOf()
 
     class ItemHolder(val binding: ItemSearchBinding) : RecyclerView.ViewHolder(binding.root)
@@ -35,6 +39,7 @@ class SearchAdapter(private var searchItems: MutableList<SearchItemModel> = Samp
             binding.searchSubtitle.text = suggestion.body
             binding.root.setOnClickListener {
                 Snackbar.make(it, "Suggestion number $position", Snackbar.LENGTH_SHORT).show()
+                searchSuggestionListener.onSuggestionClicked(binding,suggestion)
                 /* val action =
                      ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteReferenceId = suggestion.suggestedNoteReferenceId)
                  Navigation.findNavController(it).navigate(action)*/
@@ -48,7 +53,9 @@ class SearchAdapter(private var searchItems: MutableList<SearchItemModel> = Samp
 
 
     fun submitList(newSearchItems: MutableList<SearchItemModel>) {
-        searchItems = newSearchItems
+        searchItems.clear()
+        searchItems.addAll(newSearchItems)
+        notifyDataSetChanged()
     }
 
 }

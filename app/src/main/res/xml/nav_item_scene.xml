@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/endMain"
+        motion:constraintSetStart="@id/startMain"
+        motion:duration="2000">
+        <KeyFrameSet />
+        <OnClick motion:targetId="@+id/mainAddNoteButton" />
+    </Transition>
+    <Transition
+        motion:constraintSetEnd="@+id/startMain"
+        motion:constraintSetStart="@id/endMain"
+        motion:duration="1500">
+        <KeyFrameSet />
+        <OnClick motion:targetId="@+id/card" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:alpha="0"
+            android:elevation="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/mainAddNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:rotation="180"
+            android:translationX="20dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:alpha="1"
+            android:elevation="4dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/mainAddNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:elevation="4dp"
+            android:rotation="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/startMain">
+        <Constraint
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:alpha="1"
+            android:elevation="4dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/mainAddNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:elevation="4dp"
+            android:rotation="0"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/endMain">
+        <Constraint
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:alpha="0"
+            android:elevation="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/mainAddNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:rotation="180"
+            android:translationX="20dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        android:id="@+id/slide_card_into_screen"
+        motion:autoTransition="animateToEnd"
+        motion:constraintSetEnd="@+id/endMain"
+        motion:constraintSetStart="@+id/startMain">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/card" />
+            <KeyAttribute
+                android:elevation="0dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/card" />
+            <KeyAttribute
+                android:elevation="6dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/mainAddNoteButton" />
+        </KeyFrameSet>
+    </Transition>
+    <Transition
+        android:id="@+id/slide_card_out_of_screen"
+        motion:autoTransition="animateToStart"
+        motion:constraintSetEnd="@+id/startMain"
+        motion:constraintSetStart="@+id/endMain">
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="0.5"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/card" />
+            <KeyAttribute
+                android:elevation="4dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/card" />
+            <KeyAttribute
+                android:elevation="4dp"
+                motion:framePosition="0"
+                motion:motionTarget="@+id/mainAddNoteButton" />
+        </KeyFrameSet>
+    </Transition>
+</MotionScene>

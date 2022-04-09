@@ -3,20 +3,26 @@ package com.adityaamolbavadekar.gonotes.features.note.edit
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import com.adityaamolbavadekar.gonotes.R
 import com.adityaamolbavadekar.gonotes.base.BaseFragment
 import com.adityaamolbavadekar.gonotes.databinding.FragmentEditNoteBinding
+import com.adityaamolbavadekar.gonotes.features.bottomsheet.EditNoteBottomSheet
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
 import com.adityaamolbavadekar.gonotes.logger.Logger.debugLog
 import com.adityaamolbavadekar.gonotes.usecases.create.NoteUtils
 
-class EditNoteFragment : BaseFragment() {
+class EditNoteFragment : BaseFragment(), Toolbar.OnMenuItemClickListener {
 
     private lateinit var binding: FragmentEditNoteBinding
     private var noteModel: NoteModel = NoteUtils.Creator().build()
+    private lateinit var bottomSheet: EditNoteBottomSheet
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,13 +35,20 @@ class EditNoteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ViewCompat.setTransitionName(binding.root,"edit_note_transition")
         val noteId: Int = EditNoteFragmentArgs.fromBundle(arguments!!).noteReferenceId
-        viewModel.requestNote(noteId)
-        viewModel.noteWithId.observe(viewLifecycleOwner) { noteItem ->
-            noteModel = noteItem
-            binding.noteTitleEditText.setText(noteItem.title)
-            binding.noteBodyEditText.setText(noteItem.title)
-        }
+        debugLog("NoteId=$noteId")
+        bottomSheet = EditNoteBottomSheet()
+        registerObservers(noteId)
+        binding.editNoteBottomAppbar.setOnMenuItemClickListener(this)
+        val bottomSheet = binding.bottomSheetLayout
+    }
+
+    private fun registerObservers(noteId: Int) {
+        viewModel.getNoteForId(noteId).observe(viewLifecycleOwner, {note->
+            binding.noteTitleEditText.setText(note.title)
+            binding.noteBodyEditText.setText(note.body)
+        })
         viewModel.title.observe(viewLifecycleOwner) {
             binding.noteTitleEditText.setText(it)
         }
@@ -71,13 +84,23 @@ class EditNoteFragment : BaseFragment() {
             Toast.makeText(mContext!!, "Note saved", Toast.LENGTH_SHORT).show()
         }
     }
-
-    override fun onWelcomeNeeded() {
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        when (item?.itemId){
+            R.id.action_edit_note_share-> {}
+            R.id.action_edit_note_color-> {bottomSheet.show(mContext!!.supportFragmentManager,EditNoteBottomSheet.TAG)}
+            R.id.action_edit_note_edit_label-> {}
+            R.id.action_edit_note_attach-> {}
+            R.id.action_edit_note_text_size_change-> {}
+            R.id.action_edit_note_duplicate-> {}
+            R.id.action_edit_note_delete-> {}
+        }
+        return true
     }
 
+    override fun onWelcomeNeeded() {}
     override fun setHasMenu(): Boolean = false/*Edit later TODO*/
     override fun setTag(): String = "EditNoteFragment"
     override fun setDescription(): String =
         "A Fragment class which helps user edit an existing note and auto save it to the database."
-
+    
 }

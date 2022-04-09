@@ -73,7 +73,15 @@
     <color name="dark_purple">#4A148C</color>
     <color name="light_teal">#80CBC4</color>
     <color name="dark_teal">#004D40</color>
-    <!--    Go Notes Material Theming-->
+
+    <!--    Go Notes Colors-->
+    <color name="go_notes_red_200">#FFAB91</color>
+    <color name="go_notes_blue_200">#80DEEA</color>
+    <color name="go_notes_yellow_200">#FFF59D</color>
+    <color name="go_notes_orange_200">#FFE082</color>
+<!--    <color name="go_notes_grey_200">#C3C1C2</color>-->
+    <color name="go_notes_green_200">#B7ECA0</color>
+    <color name="go_notes_purple_200">#CE93D8</color>
 
 
 </resources>

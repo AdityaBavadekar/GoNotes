@@ -58,5 +58,11 @@
         app:key="contact_header"
         app:title="@string/contact_us" />
 
+    <SwitchPreferenceCompat
+        app:key="GENERATE_DEBUG_LISTS"
+        app:title="Generate List for testing"
+        app:defaultValue="false"
+        />
+
 
 </PreferenceScreen>

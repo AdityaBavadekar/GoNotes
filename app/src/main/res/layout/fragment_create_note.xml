@@ -5,10 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:transitionGroup="true"
-    android:transitionName="@string/transition_name_create_note"
+    android:id="@+id/createNoteRootLayout"
     android:paddingTop="10dp">
-
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -31,7 +29,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,26 +44,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:orientation="vertical">
-
-            <!--
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Colour"
-                            android:textAppearance="@style/TextAppearance.MyTheme.BodyHeader" />
-            -->
-
-            <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:visibility="gone"
-                android:entries="@array/format"
-                android:focusable="true"
-                android:paddingHorizontal="15dp"
-                android:paddingVertical="10dp" />
-
 
             <EditText
                 android:id="@+id/noteTitleEditText"
@@ -102,12 +79,15 @@
                 android:layout_marginTop="10dp" />
 
         </LinearLayout>
+
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
+        app:elevation="4dp"
+        android:background="?attr/colorSurface"
         app:menu="@menu/menu_edit_note_bottom_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

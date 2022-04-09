@@ -22,9 +22,6 @@ abstract class BaseActivity : AppCompatActivity() {
     private var TAG: String = "BaseActivity"
     private lateinit var activityDesc: String
     lateinit var pref: SharedPreferences
-    lateinit var navController: NavController
-    lateinit var navHostFragment: NavHostFragment
-    private var navigationUiEnabled: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,12 +67,6 @@ abstract class BaseActivity : AppCompatActivity() {
         debugLog("onDetachedFromWindow Called")
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return if (navigationUiEnabled) {
-            navController.navigateUp() || super.onSupportNavigateUp()
-        } else super.onSupportNavigateUp()
-    }
-
     /**
      * Called to set Logging TAG.
      * */
@@ -96,8 +87,12 @@ abstract class BaseActivity : AppCompatActivity() {
      * @see [NavigationUI.setupActionBarWithNavController]
      *
      * */
-    fun setupNavigation(setup: Boolean = false, @IdRes fragmentContainer: Int? = null, supportActionBar : ActionBar? = null) {
-        if (!setup || fragmentContainer == null || supportActionBar == null) {
+/*    fun setupNavigation(setup: Boolean = false, @IdRes fragmentContainer: Int? = null) {
+        if (!setup) {
+            navigationUiEnabled = false
+            return
+        }
+        else if (fragmentContainer == null) {
             navigationUiEnabled = false
             return
         }
@@ -106,7 +101,7 @@ abstract class BaseActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this, navController)
         navigationUiEnabled = true
-    }
+    }*/
 
     private var isFullScreen: Boolean = false
 

@@ -5,6 +5,10 @@
     <dimen name="launcher_app_name_text_size">22sp</dimen>
     <dimen name="default_fab_margin">16dp</dimen>
     <dimen name="note_margin">5dp</dimen>
+    <dimen name="elevation_2">2dp</dimen>
+    <dimen name="elevation_4">4dp</dimen>
+    <dimen name="elevation_8">8dp</dimen>
+    <dimen name="elevation_16">16dp</dimen>
     <dimen name="note_width">150dp</dimen>
     <dimen name="note_corner_radius">25dp</dimen>
     <dimen name="note_icon_size">20dp</dimen>

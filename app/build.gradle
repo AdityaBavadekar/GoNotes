@@ -13,7 +13,7 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName "1.2022.1-beta01"
-
+        vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:alpha="0.9"
-        android:background="?colorPrimary"
+        android:background="?colorPrimarySurface"
         app:liftOnScroll="true"
         app:liftOnScrollTargetViewId="@id/mainFrameLayout">
 
@@ -182,15 +182,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-<!--
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentNavigator"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:navGraph="@navigation/main_navigation" />-->
+        <!--
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragmentNavigator"
+                    android:name="androidx.navigation.fragment.NavHostFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:navGraph="@navigation/main_navigation" />-->
 
-        <androidx.fragment.app.FragmentContainerView
+        <!--Using `androidx.fragment.app.FragmentContainerView` as NavHostFragment does not handle up navigation
+        properly, so instead using `fragment`-->
+        <fragment
             android:id="@+id/fragmentHolder"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
@@ -200,14 +202,111 @@
 
     </FrameLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mainAddNoteButton"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/default_fab_margin"
-        android:padding="20dp"
-        android:visibility="gone"
-        android:src="@drawable/add" />
+        android:layout_gravity="center"
+        app:layoutDescription="@xml/nav_item_scene">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            app:cardBackgroundColor="?attr/colorButtonNormal"
+            app:cardCornerRadius="?attr/cardCornerRadiusSize"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/mainAddNoteButton2"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_close_circle"
+                    android:contentDescription="close menu"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_close"
+                    android:visibility="invisible" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:paddingVertical="6dp"
+                    app:tabIndicatorFullWidth="false"
+                    android:id="@+id/tabLayout"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="?android:textColorPrimary"
+                    app:tabTextAppearance="?attr/textAppearanceBody2">
+
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/notesTabItem"
+                        android:text="Notes" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/favouritesTabItem"
+                        android:text="Favourites" />
+                    <!--NOT IMPLEMENTED todo-->
+<!--
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/archivedTabItem"
+                        android:visibility="gone"
+                        android:text="Archived" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:id="@+id/labelsTabItem"
+                        android:text="Labels" />
+                    -->
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/binTabItem"
+                        android:text="Recycle Bin" />
+                </com.google.android.material.tabs.TabLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mainAddNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="20dp"
+            android:rotation="180"
+            android:src="@drawable/ic_baseline_arrow_right_alt_24"
+            app:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

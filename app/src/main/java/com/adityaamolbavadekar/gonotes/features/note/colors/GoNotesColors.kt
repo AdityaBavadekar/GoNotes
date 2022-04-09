@@ -14,4 +14,4 @@ import android.os.Parcelable
  * @since **April, 2022**
  */
 
-enum class GoNotesColors() { Cyan, Blue, Red, Yellow, Grey, Orange; }
+enum class GoNotesColors() { Green, Blue, Red, Yellow, Purple, Orange; }

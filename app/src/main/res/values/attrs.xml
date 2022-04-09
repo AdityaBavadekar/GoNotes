@@ -1,0 +1,9 @@
+<resources>
+
+    <attr format="dimension" name="fabMargin"/>
+    <attr format="reference" name="textAppearanceBody3"/>
+    <attr format="reference" name="textAppearanceBodyHeader"/>
+    <attr format="dimension" name="toolbarSize"/>
+    <attr format="dimension" name="cardCornerRadiusSize"/>
+
+</resources>

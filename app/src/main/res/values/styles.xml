@@ -61,9 +61,15 @@
         <item name="textAppearanceSubtitle2">@style/TextAppearance.MyTheme.Subtitle2</item>
         <item name="textAppearanceBody1">@style/TextAppearance.MyTheme.Body1</item>
         <item name="textAppearanceBody2">@style/TextAppearance.MyTheme.Body2</item>
+        <item name="textAppearanceBody3">@style/TextAppearance.MyTheme.Body3</item>
+        <item name="textAppearanceBodyHeader">@style/TextAppearance.MyTheme.BodyHeader</item>
         <item name="textAppearanceButton">@style/TextAppearance.MyTheme.Button</item>
         <item name="textAppearanceCaption">@style/TextAppearance.MyTheme.Caption</item>
         <item name="textAppearanceOverline">@style/TextAppearance.MyTheme.Overline</item>
+        <item name="fabMargin">@dimen/default_fab_margin</item>
+        <item name="toolbarSize">56dp</item>
+        <item name="cardCornerRadiusSize">25dp</item>
+        <item name="android:editTextBackground">@drawable/edit_note_edit_text_background</item>
         <!--Material shape attributes-->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.GoNotes.SmallComponent</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.GoNotes.MediumComponent</item>
@@ -72,8 +78,10 @@
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GoNotes.BottomSheetDialog</item>
         <item name="navigationViewStyle">@style/Widget.GoNotes.NavigationView</item>
+        <item name="bottomAppBarStyle">@style/GoNotes.Widget.BottomAppBar</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
-        <item name="switchStyle">@style/Widget.GoNotes.Swicth</item>
+        <item name="switchStyle">@style/Widget.GoNotes.Switch</item>
+        <item name="checkboxStyle">@style/Widget.GoNotes.Checkbox</item>
     </style>
 
     <style name="Base.Theme.GoNotesMaterialTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">

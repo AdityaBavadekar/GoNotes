@@ -42,4 +42,10 @@
         <item name="cornerSizeTopLeft">50%</item>
     </style>
 
+    <!--Full Circular Shape Appearance overlay for ShapeableImageView -->
+    <style name="ShapeAppearanceOverlay.GoNotes.Image.FullCircle" parent="">
+        <item name="cornerSize">12dp</item>
+<!--        <item name="cornerSizeTopLeft">0%</item>-->
+    </style>
+
 </resources>

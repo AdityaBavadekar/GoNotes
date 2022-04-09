@@ -2,11 +2,14 @@ package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
 import android.content.SharedPreferences
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.adityaamolbavadekar.gonotes.databinding.ItemNoteBinding
@@ -22,8 +25,17 @@ import java.util.*
  * @author [**Aditya Bavadekar**](https://github.com/AdityaBavadekar)
  * @since **April, 2022** *
  */
-class NoteAdapter(private val context: FragmentActivity, private var notes: List<NoteModel>) :
+class NoteAdapter(
+    private val context: FragmentActivity,
+    private var notes: List<NoteModel>,
+    private val noteAdapterListener: NoteAdapterListener
+) :
     RecyclerView.Adapter<NoteAdapter.NoteHolder>() {
+
+    interface NoteAdapterListener {
+        fun onNoteClicked(cardView: View, note: NoteModel)
+        fun onNoteLongPressed(binding: ItemNoteBinding, note: NoteModel): Boolean
+    }
 
     class NoteHolder(val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -56,13 +68,18 @@ class NoteAdapter(private val context: FragmentActivity, private var notes: List
             */
             handleNoteSettings(note, binding)
             ViewCompat.setTransitionName(binding.root, note.id.toString())
-            binding.root.setOnClickListener {
-                val action =
-                    ViewNoteFragmentDirections.actionViewNoteFragmentToEditNoteFragment(noteReferenceId = note.id)
-                Navigation.findNavController(it).navigate(action)
+            binding.root.setOnClickListener {cardView->
+                noteAdapterListener.onNoteClicked(cardView, note)
+            }
+            binding.root.setOnLongClickListener {
+                noteAdapterListener.onNoteLongPressed(
+                    binding,
+                    note
+                )
             }
         }
     }
+
 
     private fun handleNoteSettings(note: NoteModel, binding: ItemNoteBinding) {
         /* if (note.isLocked) {

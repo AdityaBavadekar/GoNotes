@@ -4,9 +4,8 @@
     <!--    BottomAppBar-->
     <style name="GoNotes.Widget.BottomAppBar" parent="Widget.MaterialComponents.BottomAppBar.Colored">
         <!-- Customize your theme here. -->
-        <item name="colorSurface">@color/BlackColor</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
     </style>
-
 
     <!--Bottom Sheets-->
     <style name="ThemeOverlay.GoNotes.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
@@ -24,17 +23,34 @@
     </style>
 
     <!--Navigation Drawer-->
-    <style name="Widget.GoNotes.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+    <style name="Widget.GoNotes.NavigationView" parent="Widget.Material3.NavigationView">
         <item name="itemTextAppearance">?attr/textAppearanceBody2</item>
+        <item name="itemShapeFillColor">@color/m3_navigation_item_background_color</item>
+<!--        <item name="itemTextColor">?attr/colorPrimary</item>
+        <item name="itemIconTint">?attr/colorPrimary</item>-->
+        <item name="itemTextColor">?android:textColorPrimary</item>
+        <item name="itemIconTint">?android:textColorPrimary</item>
     </style>
 
     <!--Switch-->
-    <style name="Widget.GoNotes.Swicth" parent="Widget.MaterialComponents.CompoundButton.Switch">
+    <style name="Widget.GoNotes.Switch" parent="Widget.MaterialComponents.CompoundButton.Switch">
         <!-- Inherit default text color since the component doesn't draw a surface. -->
         <item name="android:textAppearance">?attr/textAppearanceBodyMedium</item>
         <item name="thumbTint">@drawable/gonotes_switch_thumb_tint</item>
         <item name="trackTint">@drawable/gonotes_switch_track_tint</item>
         <item name="trackTintMode">src_in</item>
+    </style>
+
+    <!--Checkbox-->
+    <style name="Widget.GoNotes.Checkbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="enforceMaterialTheme">true</item>
+        <item name="useMaterialThemeColors">true</item>
+        <item name="buttonTint">?attr/colorPrimary</item>
+        <item name="android:minWidth">?attr/minTouchTargetSize</item>
+        <item name="android:minHeight">?attr/minTouchTargetSize</item>
+        <item name="android:button">?android:attr/listChoiceIndicatorMultiple</item>
+        <item name="buttonCompat">?attr/listChoiceIndicatorMultipleAnimated</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 
