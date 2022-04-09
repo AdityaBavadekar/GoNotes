@@ -1,11 +1,6 @@
 package com.adityaamolbavadekar.gonotes.features.note.viewnotes
 
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.core.content.edit
 import androidx.lifecycle.*
-import androidx.preference.PreferenceManager
-import com.adityaamolbavadekar.gonotes.BuildConfig
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteModel
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteRepository
 import com.adityaamolbavadekar.gonotes.features.search.source.RecentSearchesRepository
@@ -31,9 +26,10 @@ class NotesViewModel(
     val allNotes: LiveData<List<NoteModel>> = repository.allNotes.asLiveData()
 
     /*EDIT NOTE AND CREATE NOTE FRAGMENT FUNCTIONS*/
-    fun getNoteForId(ID:Int): LiveData<NoteModel> {
+    fun getNoteForId(ID: Int): LiveData<NoteModel> {
         return repository.getNote(ID).asLiveData()
     }
+
     private val _title: MutableLiveData<String> = MutableLiveData("")
     private val _body: MutableLiveData<String> = MutableLiveData("")
     val title: LiveData<String> = _title
@@ -48,6 +44,7 @@ class NotesViewModel(
         _title.postValue(note.title)
         _body.postValue(note.body)
     }
+
     fun loadNotes() {
         val start = System.currentTimeMillis()
         HyperLog.i("ViewModel", "Loading Notes...")
@@ -93,14 +90,17 @@ class NotesViewModel(
     /*FUNCTIONS FOR SEARCH FRAGMENT*/
     val searchHistory: LiveData<List<SearchItemModel>>? =
         searchRepository?.searchHistory?.asLiveData()
+
     fun insertQuery(recentSearch: SearchItemModel) =
         viewModelScope.launch {
             searchRepository!!.insertIntoSearchHistory(recentSearch)
         }
+
     fun deleteQuery(recentSearch: SearchItemModel) =
         viewModelScope.launch {
             searchRepository!!.deleteSearchItem(recentSearch)
         }
+
     fun deleteAll() = viewModelScope.launch { searchRepository!!.deleteAll() }
 
 

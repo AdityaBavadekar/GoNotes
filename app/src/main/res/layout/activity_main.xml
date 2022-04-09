@@ -251,24 +251,21 @@
                     app:tabSelectedTextColor="?android:textColorPrimary"
                     app:tabTextAppearance="?attr/textAppearanceBody2">
 
-
+<!--
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/notesTabItem"
                         android:text="Notes" />
 
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/favouritesTabItem"
-                        android:text="Favourites" />
+                        android:text="Favourites" />-->
                     <!--NOT IMPLEMENTED todo-->
 <!--
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/archivedTabItem"
                         android:visibility="gone"
                         android:text="Archived" />
 
@@ -276,15 +273,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        android:id="@+id/labelsTabItem"
                         android:text="Labels" />
                     -->
-
+<!--
                     <com.google.android.material.tabs.TabItem
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/binTabItem"
-                        android:text="Recycle Bin" />
+                        android:text="Recycle Bin" />-->
                 </com.google.android.material.tabs.TabLayout>
 
             </LinearLayout>

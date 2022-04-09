@@ -11,50 +11,81 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingVertical="4dp">
-
-        <ImageView
-            android:id="@+id/searchSuggestionIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="20dp"
-            android:src="@drawable/ic_search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_history"
-
-            />
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="24dp"
-            android:orientation="vertical"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp">
+            android:id="@+id/searchItemContainer"
+            android:orientation="horizontal"
+            android:paddingVertical="4dp">
 
-            <TextView
-                android:id="@+id/searchTitle"
+            <ImageView
+                android:id="@+id/searchSuggestionIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
+                app:srcCompat="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_history"
+
+                />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.MyTheme.Body2"
-                tools:text="@tools:sample/lorem/random" />
+                android:layout_gravity="center"
+                android:layout_marginEnd="24dp"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
-            <TextView
-                android:id="@+id/searchSubtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.MyTheme.Body3"
-                tools:text="@tools:sample/lorem/random" />
+                <TextView
+                    android:id="@+id/searchTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <TextView
+                    android:id="@+id/searchSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.MyTheme.Body3"
+                    tools:text="@tools:sample/lorem/random" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:id="@+id/noItemsFoundLayout"
+        android:paddingVertical="4dp">
+
+        <TextView
+            android:id="@+id/noItemsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="25dp"
+            android:textAppearance="@style/TextAppearance.MyTheme.Headline6"
+            tools:text="No notes match QUERY" />
+
     </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </FrameLayout>

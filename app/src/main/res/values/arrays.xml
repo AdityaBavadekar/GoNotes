@@ -10,4 +10,37 @@
         <item>reply_all</item>
     </string-array>
 
+
+    <string-array name="gonote_colours_entries">
+        <item>Purple</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Green</item>
+        <item>Orange</item>
+        <item>Yellow</item>
+    </string-array>
+
+    <string-array name="gonote_colours_values">
+        <item>purple</item>
+        <item>blue</item>
+        <item>red</item>
+        <item>yellow</item>
+        <item>green</item>
+        <item>orange</item>
+        <item>yellow</item>
+    </string-array>
+
+    <string-array name="theme_entries">
+        <item>Dark</item>
+        <item>Light</item>
+        <item>System Default</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>

@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.TypedValue
-import android.view.animation.AnimationUtils
 import android.view.animation.AnimationUtils.loadInterpolator
 import android.view.animation.Interpolator
 import androidx.annotation.*
@@ -41,7 +40,7 @@ fun Context.themeStyle(@AttrRes attr: Int): Int {
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @SuppressLint("Recycle")
 fun Context.themeInterpolator(@AttrRes attr: Int): Interpolator {
-    return AnimationUtils.loadInterpolator(
+    return loadInterpolator(
         this,
         obtainStyledAttributes(intArrayOf(attr)).use {
             it.getResourceId(0, android.R.interpolator.fast_out_slow_in)

@@ -3,10 +3,8 @@ package com.adityaamolbavadekar.gonotes.features.home
 import android.os.Bundle
 import androidx.annotation.IdRes
 import androidx.core.view.isGone
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import com.adityaamolbavadekar.gonotes.R
@@ -20,12 +18,6 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     private lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
     lateinit var navHostFragment: NavHostFragment
-
-    private val currentNavigationFragment: Fragment?
-        get() = supportFragmentManager.findFragmentById(R.id.fragmentHolder)
-            ?.childFragmentManager
-            ?.fragments
-            ?.first()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,28 +59,34 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     private fun setupForViewNotesFragment() {
+        supportActionBar?.show()
     }
 
     private fun setupForEditNoteFragment() {
         binding.constraintLayout.isGone = true
+        supportActionBar?.show()
     }
 
     private fun setupForCreateNoteFragment() {
         binding.constraintLayout.isGone = true
+        supportActionBar?.show()
     }
 
     private fun setupForSearchFragment() {
         binding.constraintLayout.isGone = true
+        supportActionBar?.hide()
     }
 
     private fun setupForFeedbackFragment() {
         binding.constraintLayout.isGone = true
+        supportActionBar?.show()
     }
 
     private fun addTabItems() {
-        binding.tabLayout.addTab(TabLayout.Tab().setId(1).setText("Notes"), 0, true)
-        binding.tabLayout.addTab(TabLayout.Tab().setId(2).setText("Favourites"), 1, false)
-        binding.tabLayout.addTab(TabLayout.Tab().setId(3).setText("Recycle Bin"), 2, false)
+        val tabLayout = binding.tabLayout
+        tabLayout.addTab(tabLayout.newTab().setId(1).setText("Notes"), 0, true)
+        tabLayout.addTab(tabLayout.newTab().setId(2).setText("Favourites"), 1, false)
+        tabLayout.addTab(tabLayout.newTab().setId(3).setText("Recycle Bin"), 2, false)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -106,7 +104,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     private fun changeCurrentDestinationTo(@IdRes action: Int) {
-        Navigation.findNavController(binding.root).navigate(action, null)
+        navController.navigate(action, null)
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {}

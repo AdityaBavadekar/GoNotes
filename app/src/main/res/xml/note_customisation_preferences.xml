@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        app:title="Default note colour"
+        app:entries="@array/gonote_colours_entries"
+        app:entryValues="@array/gonote_colours_values"
+        app:dialogTitle="Choose default note colour"
+        />
+
+    
+
+</PreferenceScreen>

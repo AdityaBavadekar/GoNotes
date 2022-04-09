@@ -1,0 +1,29 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <Preference app:title="Application Name"
+        app:shouldDisableView="true"
+        app:summary="@string/app_name"/>
+
+    <Preference app:title="Application Version Name"
+        app:shouldDisableView="true"
+        app:summary="@string/versionName"/>
+
+    <Preference app:title="Application Version Code"
+        app:shouldDisableView="true"
+        app:summary="@string/versionCode"/>
+
+    <Preference app:title="Operating system"
+        app:key="operating_system"
+        app:shouldDisableView="true"
+        app:summary="@string/edit_note_edit_text_loading_status"/>
+
+    <Preference app:title="Legal info"
+        app:shouldDisableView="true"
+        app:summary="@string/about_app_copyright"/>
+
+    <Preference app:title="@string/open_source_licences"
+        app:key="open_source_licences"/>
+
+
+</PreferenceScreen>

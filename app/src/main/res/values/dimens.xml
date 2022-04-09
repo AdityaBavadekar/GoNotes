@@ -34,6 +34,15 @@
     <dimen name="text_size_label_large">13sp</dimen>
     <dimen name="text_size_label_medium">12sp</dimen>
     <dimen name="text_size_label_small">11sp</dimen>
+    <dimen name="text_size_incremented_title0">19sp</dimen>
+    <dimen name="text_size_incremented_title1">21sp</dimen>
+    <dimen name="text_size_incremented_title2">24sp</dimen>
+    <dimen name="text_size_incremented_title3">27sp</dimen>
+    <dimen name="text_size_incremented_body0">15sp</dimen>
+    <dimen name="text_size_incremented_body1">18sp</dimen>
+    <dimen name="text_size_incremented_body2">21sp</dimen>
+    <dimen name="text_size_incremented_body3">24sp</dimen>
+
 <!--    TEXT SIZES-->
 
 <!--    MATERIAL-->

@@ -63,10 +63,9 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
-        android:visibility="gone"
+        style="@style/GoNotes.Widget.BottomAppBar"
+        app:elevation="4dp"
         app:menu="@menu/menu_edit_note_bottom_bar" />
 
-
-    <include layout="@layout/edit_note_persistent_bottom_sheet" android:id="@+id/bottomSheetLayout"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

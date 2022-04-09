@@ -23,19 +23,29 @@ class SimpleBottomSheetMenuAdapter(private val type: String) :
     }
 
     override fun onBindViewHolder(holder: MenuItemHolder, position: Int) {
-        if (BottomSheetMenu.COLORS.name == type) {
-            holder.binding.textView1.text = colorNames[position]
-            holder.binding.imageView1.setBackgroundColor(colorIds[position])
-        }else {
+        holder.apply {
 
+            when (type) {
+                BottomSheetMenu.COLORS.name -> {
+                    binding.textView1.text = colorNames[position]
+                    binding.imageView1.setBackgroundColor(colorIds[position])
+                }
+                BottomSheetMenu.ATTACH.name -> {
+                    binding.textView1.text = attachTitles[position]
+                    binding.imageView1.setImageResource(attachImageIds[position])
+                }
+                BottomSheetMenu.DUPLICATE.name -> {
+                    binding.textView1.text = duplicateTitles[position]
+                }
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return when (BottomSheetMenu.valueOf(type)) {
-            BottomSheetMenu.COLORS -> 6
+            BottomSheetMenu.COLORS -> 6 //6 GoNoteColors
             BottomSheetMenu.ATTACH -> 5
-            BottomSheetMenu.DUPLICATE -> 2
+            BottomSheetMenu.DUPLICATE -> 3
         }
     }
 
@@ -50,5 +60,15 @@ class SimpleBottomSheetMenuAdapter(private val type: String) :
         R.color.go_notes_purple_200,
         R.color.go_notes_orange_200
     )
-
+    private val attachTitles =
+        listOf("Add image", "Take photo", "Add document", "Add Checkboxes", "Add Collaborators")
+    private val attachImageIds: List<Int> =
+        listOf(
+            R.drawable.ic_image,
+            R.drawable.ic_photo_camera,
+            R.drawable.ic_file,
+            R.drawable.ic_check_box,
+            R.drawable.ic_outline_person_add_24
+        )
+    private val duplicateTitles = listOf("Duplicate note","Duplicate title","Duplicate description")
 }

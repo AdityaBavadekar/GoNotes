@@ -2,10 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/createNoteRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/createNoteRootLayout"
     android:paddingTop="10dp">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -83,11 +83,12 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/createNoteBottomAppbar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
-        app:elevation="4dp"
         android:background="?attr/colorSurface"
+        app:elevation="4dp"
         app:menu="@menu/menu_edit_note_bottom_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

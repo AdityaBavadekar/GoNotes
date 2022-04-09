@@ -3,16 +3,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 
+
+def appVersionCode = 1
+def appVersionName = "1.2022.1-beta01"
+
 android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
+
 
     defaultConfig {
         applicationId "com.adityaamolbavadekar.gonotes"
         minSdkVersion 19
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.2022.1-beta01"
+        versionCode appVersionCode
+        versionName appVersionName
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,9 +29,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             debuggable false
             versionNameSuffix '-Release'
+            resValue 'string','versionCode',"$appVersionCode"
+            resValue 'string','versionName',"$appVersionName"
+            buildConfigField 'boolean','appGoNotesDevLoggingEnabled','Boolean.parseBoolean("false")'
+        }
+        releaseTesting {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            versionNameSuffix '-ReleaseTesting'
+            resValue 'string','versionCode',"$appVersionCode"
+            resValue 'string','versionName',"$appVersionName"
+            buildConfigField 'boolean','appGoNotesDevLoggingEnabled','Boolean.parseBoolean("true")'
         }
         debug {
             versionNameSuffix '-Debug'
+            resValue 'string','versionCode',"$appVersionCode"
+            resValue 'string','versionName',"$appVersionName"
+            buildConfigField 'boolean','appGoNotesDevLoggingEnabled','Boolean.parseBoolean("true")'
         }
     }
 

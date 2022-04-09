@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.fragment.app.Fragment
 import com.adityaamolbavadekar.gonotes.BuildConfig
-import com.adityaamolbavadekar.gonotes.logger.Logger.warnLog
+import com.hypertrack.hyperlog.HyperLog
 
 object Logger {
 
@@ -15,6 +15,11 @@ object Logger {
     fun Application.installLogger() {
         isDebug = BuildConfig.DEBUG
         if (isDebug) debugLog("GoNotes Logger initialised [isDebug=true]")
+    }
+
+    private fun saveLogToHyperLog(tag: String, message: String, tr: Throwable? = null){
+        if(tr==null)HyperLog.d(tag,message)
+        else HyperLog.d(tag,message, tr)
     }
 
     /*DEBUG LOGGING*/
@@ -27,6 +32,8 @@ object Logger {
      */
     fun d(tag: String?, msg: String) {
         if (isDebug) Log.d(tag, msg)
+        else{}
+        saveLogToHyperLog(tag!!,msg)
     }
 
     /**
@@ -70,6 +77,8 @@ object Logger {
      */
     fun i(tag: String?, msg: String) {
         if (isDebug) Log.i(tag, msg)
+        else{}
+        saveLogToHyperLog(tag!!,msg)
     }
 
     /**
@@ -113,6 +122,8 @@ object Logger {
      */
     fun w(tag: String?, msg: String) {
         if (isDebug) Log.w(tag, msg)
+        else{}
+        saveLogToHyperLog(tag!!,msg)
     }
 
     /**
@@ -124,6 +135,8 @@ object Logger {
      */
     fun w(tag: String?, msg: String, tr: Throwable?) {
         if (isDebug) Log.w(tag, msg, tr)
+        else{}
+        saveLogToHyperLog(tag!!,msg,tr)
     }
 
     /*
@@ -166,6 +179,8 @@ object Logger {
      */
     fun e(tag: String?, msg: String) {
         if (isDebug) Log.e(tag, msg)
+        else{}
+        saveLogToHyperLog(tag!!,msg)
     }
 
     /**
@@ -176,7 +191,9 @@ object Logger {
      * @param tr An exception to log
      */
     fun e(tag: String?, msg: String, tr: Throwable?) {
-        Log.e(tag, msg, tr)
+        if (isDebug) Log.e(tag, msg, tr)
+        else{}
+        saveLogToHyperLog(tag!!,msg,tr)
     }
 
     /**

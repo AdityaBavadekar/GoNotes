@@ -10,8 +10,10 @@ import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteDatabase
 import com.adityaamolbavadekar.gonotes.features.note.datasource.NoteRepository
 import com.adityaamolbavadekar.gonotes.features.search.source.RecentSearchesDatabase
 import com.adityaamolbavadekar.gonotes.features.search.source.RecentSearchesRepository
+import com.adityaamolbavadekar.gonotes.logger.GoNotesLogFormat
 import com.adityaamolbavadekar.gonotes.logger.Logger.infoLog
 import com.adityaamolbavadekar.gonotes.logger.Logger.installLogger
+import com.hypertrack.hyperlog.HyperLog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.acra.config.mailSender
@@ -31,7 +33,7 @@ class GoNotes : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        HyperLog.initialize(this,GoNotesLogFormat(this))
         val prefs = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         var nightModeName: String = "MODE_NIGHT_FOLLOW_SYSTEM"
         nightMode =
@@ -40,7 +42,7 @@ class GoNotes : Application() {
                 nightModeName = "MODE_NIGHT_AUTO_BATTERY"
                 MODE_NIGHT_AUTO_BATTERY
             } else {
-                when (prefs.getInt("appTheme", 3)) {
+                when (prefs.getInt("theme", 3)) {
                     0 -> {
                         nightModeName = "MODE_NIGHT_YES"
                         MODE_NIGHT_YES
@@ -66,15 +68,14 @@ class GoNotes : Application() {
         MultiDex.install(this)
         installLogger()
         initAcra {
-            withEnabled(!BuildConfig.DEBUG)
+            withEnabled(BuildConfig.appGoNotesDevLoggingEnabled)
             buildConfigClass = BuildConfig::class.java
             withReportSendSuccessToast("App problem occurred")
             withParallel(true)
             withReportFormat(StringFormat.KEY_VALUE_LIST)
-
             mailSender {
-                withEnabled(!BuildConfig.DEBUG)
-                withReportFileName("GoNotesFile${System.currentTimeMillis()}")
+                withEnabled(BuildConfig.appGoNotesDevLoggingEnabled)
+                withReportFileName("GoNotesFile${System.currentTimeMillis()}.txt")
                 withMailTo("adityarbavadekar@gmail.com")
                 withSubject("Sorry, but Go Notes crashed. Here is info on crash.")
                 withBody("Date : ${Date(System.currentTimeMillis())}\nHere is attachment.")

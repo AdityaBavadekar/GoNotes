@@ -3,14 +3,10 @@ package com.adityaamolbavadekar.gonotes.base
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.annotation.IdRes
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.preference.PreferenceManager

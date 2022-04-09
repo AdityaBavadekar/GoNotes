@@ -47,7 +47,7 @@
     <string name="backup_text">Back up now</string>
     <string name="delete_all_notes">Delete all notes</string>
     <string name="restore_all_notes">Restore all notes</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">Default Note Template</string>
@@ -77,7 +77,7 @@
     <string name="small_icon">Small Icon</string>
     <string name="view_more_information_icon">View more information icon</string>
     <string name="about_app_name_version_name">Go Notes version 1.2022.1</string>
-    <string name="about_app_copyright">© 2022 Aditya Bavadekar</string>
+    <string name="about_app_copyright">©2022–2022 Go Notes (Aditya Bavadekar)</string>
     <string name="help_header">Help</string>
     <string name="get_help_header">Get help</string>
     <string name="faqs_text">FAQs</string>
@@ -89,15 +89,10 @@
     <string name="about_text">About</string>
     <string name="open_source_licences">Open-source licences</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string-array name="gonote_colours">
-        <item>Cyan</item>
-        <item>Blue</item>
-        <item>Red</item>
-        <item>Yellow</item>
-        <item>Grey</item>
-        <item>Orange</item>
-        <item>Yellow</item>
-    </string-array>
+    <string name="theme_preference_title">Application Theme</string>
+    <string name="theme_preference_dialog_title">Choose Theme</string>
+    <string name="theme_info_configure_text">Dark theme is best option when your device is in dark surroundings. You can change your theme from your device settings or from notification panel</string>
+    <string name="theme_info_text">To change theme of your device, refer the <a href="https://google.com/">documentation.</a></string>
     <string-array name="format">
         <item>Plain Text</item>
         <item>Markdown</item>
@@ -115,4 +110,5 @@
     <string name="feedback_email_edit_text_hint">example@gmail.com</string>
     <string name="include_system_logs_text">Include System logs</string>
     <string name="include_screenshot_text">Include Screenshot</string>
+    <string name="no_items_found">No matching notes found</string>
 </resources>

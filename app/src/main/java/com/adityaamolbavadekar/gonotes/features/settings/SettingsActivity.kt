@@ -40,6 +40,11 @@ class SettingsActivity : AppCompatActivity(),
         const val TITLE_TAG = "settingsActivityTitle"
     }
 
+    override fun onStart() {
+        super.onStart()
+        supportActionBar?.show()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         // Save current activity title so we can set it again after a configuration change
@@ -95,13 +100,13 @@ class SettingsActivity : AppCompatActivity(),
 
     class NoteCustomisationFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.sync_preferences, rootKey)
+            setPreferencesFromResource(R.xml.note_customisation_preferences, rootKey)
         }
     }
 
     class AboutFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.sync_preferences, rootKey)
+            setPreferencesFromResource(R.xml.about_preferences, rootKey)
         }
     }
 
@@ -113,7 +118,7 @@ class SettingsActivity : AppCompatActivity(),
 
     class ThemeFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.sync_preferences, rootKey)
+            setPreferencesFromResource(R.xml.theme_preferences, rootKey)
         }
     }
 

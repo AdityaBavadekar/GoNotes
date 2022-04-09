@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.adityaamolbavadekar.gonotes.databinding.EditNoteBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
@@ -27,9 +28,15 @@ class EditNoteBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.apply {
-            val type =SimpleBottomSheetMenuAdapter.BottomSheetMenu.COLORS.name
-            adapter = SimpleBottomSheetMenuAdapter(type)
+            adapter = SimpleBottomSheetMenuAdapter(menuType.name)
         }
+    }
+
+    private var menuType = SimpleBottomSheetMenuAdapter.BottomSheetMenu.COLORS
+
+    fun showBottomSheet(fragmentManager: FragmentManager,type: SimpleBottomSheetMenuAdapter.BottomSheetMenu){
+        menuType = type
+        show(fragmentManager,TAG)
     }
 
 }

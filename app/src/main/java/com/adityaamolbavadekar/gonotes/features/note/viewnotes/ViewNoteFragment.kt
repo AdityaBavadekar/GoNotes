@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -14,7 +13,6 @@ import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.FragmentNavigator
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -49,17 +47,15 @@ class ViewNoteFragment : BaseFragment(), NoteAdapter.NoteAdapterListener {
     private lateinit var recyclerView: RecyclerView
     private var isUsingLinearLayout: Boolean = false
     private var notesList: MutableList<NoteModel> = mutableListOf()
-    private var searchItems: MutableList<NoteModel> = mutableListOf()
 
     private fun initOnClickTransition() {
         exitTransition = MaterialElevationScale(false).apply {
-            duration = resources.getInteger(R.integer.material_motion_duration_long_2).toLong()
+            duration = resources.getInteger(R.integer.material_motion_duration_medium_2).toLong()
         }
         reenterTransition = MaterialElevationScale(true).apply {
-            duration = resources.getInteger(R.integer.material_motion_duration_long_2).toLong()
+            duration = resources.getInteger(R.integer.material_motion_duration_medium_1).toLong()
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,12 +110,6 @@ class ViewNoteFragment : BaseFragment(), NoteAdapter.NoteAdapterListener {
         linearLayoutManager = LinearLayoutManager(mContext!!)
         recyclerView = binding.notesRecyclerView
         ViewGroupCompat.setTransitionGroup(recyclerView, true)
-        val recyclerViewAnim = AnimationUtils.loadLayoutAnimation(
-            recyclerView.context,
-            R.anim.layout_recycler_view_item_fall_down
-        )
-        recyclerView.layoutAnimation = recyclerViewAnim
-        recyclerView.scheduleLayoutAnimation()
         recyclerView.adapter = this.adapter
         recyclerView.layoutManager = this.staggeredLayoutManager
     }
@@ -135,7 +125,7 @@ class ViewNoteFragment : BaseFragment(), NoteAdapter.NoteAdapterListener {
                         filtererNotes.add(it)
                     }
                 }
-                notesList.addAll(filtererNotes)
+                notesList = (filtererNotes)
                 adapter.notifyDataSetChanged()
             }
         }
